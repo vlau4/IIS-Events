@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,16 +24,22 @@ class HomeController extends Controller
      */
     public function userHome()
     {
-        return view('home', ['msg'=>'I am user!']);
+        return view('roles/user/index', [
+            'events' => Event::latest()->filter(request(['tag', 'search']))->paginate(6)
+        ]);
     }
 
     public function managerHome()
     {
-        return view('home', ['msg'=>'I am manager!']);
+        return view('roles/manager/index', [
+            'events' => Event::latest()->filter(request(['tag', 'search']))->paginate(6)
+        ]);
     }
 
     public function adminHome()
     {
-        return view('home', ['msg'=>'I am admin!']);
+        return view('roles/admin/index', [
+            'events' => Event::latest()->filter(request(['tag', 'search']))->paginate(6)
+        ]);
     }
 }

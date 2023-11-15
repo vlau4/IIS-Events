@@ -49,4 +49,9 @@ class User extends Authenticatable
             get: fn($value) => ['user', 'manager', 'admin'][$value],
         );
     }
+
+    // Relationship With Events
+    public function events() {
+        return $this->hasMany(Event::class, 'user_id');
+    }
 }
