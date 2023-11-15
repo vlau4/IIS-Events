@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->date('date');
             $table->string('tags');
             $table->string('logo')->nullable(); // nullable() means if it does not have logo-path, it is ok. It can be NULL.
             $table->longText('description');

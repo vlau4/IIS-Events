@@ -54,4 +54,9 @@ class User extends Authenticatable
     public function events() {
         return $this->hasMany(Event::class, 'user_id');
     }
+
+    // Relationship With Attendings
+    public function attendings() {
+        return $this->hasMany(Attending::class, 'user_id');
+    }
 }

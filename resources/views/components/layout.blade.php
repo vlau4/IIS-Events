@@ -121,6 +121,9 @@
             <li>
                 <a href="/categories" class="hover:text-laravel">Categories</a>
             </li>
+            <li>
+                <a href="/events/mine" class="hover:text-laravel">My Events</a>
+            </li>
             @if(auth()->user()->role == 'admin')
                 <li>
                     <a href="/users/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Users</a>

@@ -17,12 +17,8 @@
                     <h3 class="text-3xl font-bold mb-4"> Job Description </h3>
                     <div class="text-lg space-y-6">
                         {{$event->description}}
-
-                        <a href="mailto:{{$event->email}}" class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"
-                            ><i class="fa-solid fa-envelope"></i> Contact Employer</a>
-
-                        <a href="{{$event->website}}" target="_blank" class="block bg-black text-white py-2 rounded-xl hover:opacity-80"
-                            ><i class="fa-solid fa-globe"></i> Visit Website</a>
+                        <a href="/events/{{$event->id}}/add" class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-plus"></i> Add To My Events</a>
+                        <a href="mailto:{{$event->email}}" class="block bg-black text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-envelope"></i> Contact Organizer</a>
                     </div>
                 </div>
             </div>

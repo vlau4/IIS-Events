@@ -18,6 +18,7 @@ class EventFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
+            'date' => $this->faker->date(),
             'tags' => 'festival, music, pop',
             'description' => $this->faker->paragraph(5)
         ];

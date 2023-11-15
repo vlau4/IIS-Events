@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Attending;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Category;
@@ -57,5 +59,14 @@ class DatabaseSeeder extends Seeder
             'category_id' => $category->id,
             'location_id' => $location->id
         ]);
+
+        for($i = 1; $i <= 6; $i++) {
+            for($j = 1; $j <= 3; $j++) {
+                Attending::factory()->create([
+                    'user_id' => $j,
+                    'event_id' => $i
+                ]);
+            }
+        }
     }
 }

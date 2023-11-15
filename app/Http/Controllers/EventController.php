@@ -2,24 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attending;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class EventController extends Controller
 {
-    // All Events
+    // Show All Events
     public function index() {
-        return view('events.index', [
+        return view('home', [
             'events' => Event::latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);
     }
 
-    // Single Event
+    // Show Single Event
     public function show(Event $event) {
         return view('events.show', [
             'event' => $event
         ]);
+    }
+
+    // Show My Events
+    public function showMyEvents() {
+        return view('roles.user.myEvents', [
+            'events' => Event::latest()->paginate(6),
+            'attendings' => Attending::all()
+        ]);
+    }
+
+    // Add To My Events
+    public function add(Attending $attending) {
+        $formFields['attending'] = 1;
+
+        $attending->update($formFields);
+
+        return redirect('/')->with('message', 'Event added to my events successfully!');
     }
 
     // Show Create Form
@@ -31,8 +49,6 @@ class EventController extends Controller
     public function store(Request $request) {
         $formFields = $request->validate([
             'name' => 'required',
-            // 'category_id' => 'required',
-            // 'location_id' => 'required',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -47,6 +63,7 @@ class EventController extends Controller
         $formFields['location_id'] = 1;
 
         Event::create($formFields);
+        Attending::create($formFields);
 
         return redirect('/')->with('message', 'Event created successfully!');
     }
@@ -112,5 +129,4 @@ class EventController extends Controller
 
         return back()->with('message', 'Event confirmed successfully!');
     }
-
 }

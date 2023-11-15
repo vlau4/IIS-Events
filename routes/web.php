@@ -22,28 +22,11 @@ Auth::routes();
 
 // __________ JUST ADMIN _______________________________________________________________________________
 
-Route::middleware(['auth', 'user-role:admin'])->group(function() {
-    // Show Home Page for Admin
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('home.admin');
-    
+Route::middleware(['auth', 'user-role:admin'])->group(function() {    
+
     // Manage Users
     Route::get('/users/manage', [UserController::class, 'manage']);
     
-});
-
-// __________ JUST MANAGER _____________________________________________________________________________
-
-Route::middleware(['auth', 'user-role:manager'])->group(function() {
-    // Show Home Page for Manager
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('home.manager');
-
-});
-
-// __________ JUST USER ________________________________________________________________________________
-
-Route::middleware(['auth', 'user-role:user'])->group(function() {
-    // Show Home Page for User
-    Route::get('/user/home', [HomeController::class, 'userHome'])->name('home.user');
 });
 
 // __________ ADMIN AND MANAGER ________________________________________________________________________
@@ -60,7 +43,7 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
 // __________ ADMIN, MANAGER AND USER __________________________________________________________________
 
 Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
-    Route::get('/home', [HomeController::class, 'userHome'])->name('home');
+    Route::get('/', [EventController::class, 'userHome'])->name('home');
 
     // Show Create Form
     Route::get('/events/create', [EventController::class, 'create']);
@@ -71,8 +54,14 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
     // Show Edit Form
     Route::get('/events/{event}/edit', [EventController::class, 'edit']);
 
+    // Add To My Events
+    Route::get('/events/{event}/add', [EventController::class, 'add']);
+
     // Manage Events
     Route::get('/events/manage', [EventController::class, 'manage']);
+
+    //Show My Events
+    Route::get('/events/mine', [EventController::class, 'showMyEvents']);
 
     // Update Event
     Route::put('/events/{event}', [EventController::class, 'update']);
@@ -83,8 +72,8 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
 // __________ EVERYONE _________________________________________________________________________________
 
-// All events
+// Show All events
 Route::get('/', [EventController::class, 'index']);
 
-// Single Event
+// Show Single Event
 Route::get('/events/{event}', [EventController::class, 'show']);

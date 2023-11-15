@@ -48,4 +48,9 @@ class Event extends Model
     public function location() {
         return $this->belongsTo(Location::class, 'location_id');
     }
+
+    // Relationship With Attendings
+    public function attendings() {
+        return $this->hasMany(Attending::class, 'event_id');
+    }
 }
