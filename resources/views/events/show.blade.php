@@ -17,7 +17,14 @@
                     <h3 class="text-3xl font-bold mb-4"> Job Description </h3>
                     <div class="text-lg space-y-6">
                         {{$event->description}}
-                        <a href="/events/{{$event->id}}/add" class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-plus"></i> Add To My Events</a>
+                        <form method="POST" action="/add/{{$event->id}}" enctype="multipart/form-data">
+                            @csrf {{-- protection--}}
+                            @method('PUT')
+                            <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
+                                Update Event
+                            </button>
+                        </form>
+                        {{-- <a href="/events/mine/add" class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-plus"></i> Add To My Events</a> --}}
                         <a href="mailto:{{$event->email}}" class="block bg-black text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-envelope"></i> Contact Organizer</a>
                     </div>
                 </div>

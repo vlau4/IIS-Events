@@ -16,6 +16,7 @@ class Event extends Model
         'name',
         'category_id',
         'location_id',
+        'date',
         'tags',
         'description',
         'confirmed',

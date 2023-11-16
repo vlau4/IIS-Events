@@ -55,7 +55,7 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
     Route::get('/events/{event}/edit', [EventController::class, 'edit']);
 
     // Add To My Events
-    Route::get('/events/{event}/add', [EventController::class, 'add']);
+    Route::put('/add/{event}', [EventController::class, 'add']);
 
     // Manage Events
     Route::get('/events/manage', [EventController::class, 'manage']);

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attending;
+use App\Models\User;
 use App\Models\Event;
+use App\Models\Attending;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -27,17 +28,19 @@ class EventController extends Controller
     public function showMyEvents() {
         return view('roles.user.myEvents', [
             'events' => Event::latest()->paginate(6),
-            'attendings' => Attending::all()
+            'attendings' => Attending::where('user_id', auth()->id())->get()
         ]);
     }
 
     // Add To My Events
-    public function add(Attending $attending) {
+    public function add(Event $event) {
+        $attending = Attending::where('user_id', auth()->id())->where('event_id', $event->id)->first();
+
         $formFields['attending'] = 1;
 
         $attending->update($formFields);
 
-        return redirect('/')->with('message', 'Event added to my events successfully!');
+        return redirect('/events/mine')->with('message', 'Event added to my events successfully!');
     }
 
     // Show Create Form
@@ -49,6 +52,7 @@ class EventController extends Controller
     public function store(Request $request) {
         $formFields = $request->validate([
             'name' => 'required',
+            'date' => 'required|date',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -62,8 +66,15 @@ class EventController extends Controller
         $formFields['category_id'] = 1;
         $formFields['location_id'] = 1;
 
-        Event::create($formFields);
-        Attending::create($formFields);
+        $newEvent = Event::create($formFields);
+        $formFields['event_id'] = $newEvent->id;
+
+        $users = User::all();
+
+        foreach($users as $user) {
+            $formFields['user_id'] = $user->id;
+            Attending::create($formFields);
+        }
 
         return redirect('/')->with('message', 'Event created successfully!');
     }
@@ -75,6 +86,7 @@ class EventController extends Controller
 
     // Update Event
     public function update(Request $request, Event $event) {
+
         // Make sure logged in user is owner
         if($event->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -84,8 +96,7 @@ class EventController extends Controller
             'name' => 'required',
             'caterory_id' => 'required',
             'location_id' => 'required',
-            'website' => ['required', 'regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
-            'email' => ['required', 'email'],
+            'date' => 'required|date',
             'tags' => 'required',
             'description' => 'required'
         ]);

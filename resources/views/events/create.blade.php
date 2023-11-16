@@ -23,6 +23,14 @@
                 @enderror
             </div>
 
+            <div class="mb-6">
+                <label for="date" class="inline-block text-lg mb-2">Event Name</label>
+                <input type="date" class="border border-gray-200 rounded p-2 w-full" name="date" value="{{old('date')}}"/>
+                @error('date')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
             {{-- <div class="mb-6">
                 <label for="location" class="inline-block text-lg mb-2">Event Location</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="location" placeholder="Example: Remote, Boston MA, etc" value="{{old('location')}}"/>
