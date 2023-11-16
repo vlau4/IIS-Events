@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Attending;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -13,7 +15,7 @@ class EventController extends Controller
     // Show All Events
     public function index() {
         return view('home', [
-            'events' => Event::latest()->filter(request(['tag', 'search']))->paginate(6)
+            'events' => Event::where('confirmed', '1')->latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);
     }
 
@@ -45,14 +47,22 @@ class EventController extends Controller
 
     // Show Create Form
     public function create() {
-        return view('events.create');
+        return view('events.create', [
+            'categories' => Category::all(),
+            'locations' => Location::all()
+        ]);
     }
 
     // Store Event Data
     public function store(Request $request) {
         $formFields = $request->validate([
-            'name' => 'required',
-            'date' => 'required|date',
+            'title' => 'required',
+            'category_id' => 'required',
+            'location_id' => 'required',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'capacity' => 'required',
+            'entry_fee' => 'nullable',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -62,15 +72,13 @@ class EventController extends Controller
         }
 
         $formFields['user_id'] = auth()->id();
-        // THIS HAVE TO BE DELETED
-        $formFields['category_id'] = 1;
-        $formFields['location_id'] = 1;
 
-        $newEvent = Event::create($formFields);
-        $formFields['event_id'] = $newEvent->id;
+        $event = Event::create($formFields);
+        $formFields['event_id'] = $event->id;
 
         $users = User::all();
 
+        // for every user create attending to the new event
         foreach($users as $user) {
             $formFields['user_id'] = $user->id;
             Attending::create($formFields);
@@ -81,7 +89,11 @@ class EventController extends Controller
 
     // Show Edit Form
     public function edit(Event $event) {
-        return view('events.edit', ['event' => $event]);
+        return view('events.edit', [
+            'event' => $event,
+            'categories' => Category::all(),
+            'locations' => Location::all()
+        ]);
     }
 
     // Update Event
@@ -93,10 +105,13 @@ class EventController extends Controller
         }
         
         $formFields = $request->validate([
-            'name' => 'required',
-            'caterory_id' => 'required',
+            'title' => 'required',
+            'category_id' => 'required',
             'location_id' => 'required',
-            'date' => 'required|date',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'capacity' => 'required',
+            'entry_fee' => 'nullable',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -109,7 +124,7 @@ class EventController extends Controller
 
         $event->update($formFields);
 
-        return back()->with('message', 'Event updated successfully!');
+        return redirect('/')->with('message', 'Event updated successfully!');
     }
 
     // Delete Event
@@ -129,6 +144,7 @@ class EventController extends Controller
 
     // Show Confirm Section
     public function showConfirm(Event $event) {
+        // TODO: where confirm == 0
         return view('roles.manager.confirm', ['events' => Event::all()]);
     }
 

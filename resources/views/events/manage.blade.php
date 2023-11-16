@@ -10,7 +10,7 @@
                     @foreach($events as $event)
                         <tr class="border-gray-300">
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/events/{{$event->id}}">{{$event->name}}</a>
+                                <a href="/events/{{$event->id}}">{{$event->title}}</a>
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                 <a href="/events/{{$event->id}}/edit" class="text-blue-400 px-6 py-2 rounded-xl" >

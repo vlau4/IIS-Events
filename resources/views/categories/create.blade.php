@@ -5,7 +5,7 @@
             <p class="mb-4">for new events</p>
         </header>
 
-        <form method="POST" action="/categories/store" enctype="multipart/form-data">
+        <form method="POST" action="/categories" enctype="multipart/form-data">
             @csrf {{-- protection--}}
             <div class="mb-6">
                 <label for="name" class="inline-block text-lg mb-2">Name</label>

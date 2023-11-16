@@ -11,7 +11,7 @@ class UserController extends Controller
     // Manage Users
     public function manage() {
         // return view('roles.admin.manage-users', ['users' => request()->user()->get()]);
-        return view('roles.manager.confirm', ['events' => User::all()]);
+        return view('roles.admin.manage-users', ['users' => User::all()]);
     }
 
     // Edit User Role

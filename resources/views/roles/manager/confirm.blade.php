@@ -11,7 +11,7 @@
                         @if($event->confirmed == 0)
                             <tr class="border-gray-300">
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                    <a href="/events/{{$event->id}}">{{$event->name}}</a>
+                                    <a href="/events/{{$event->id}}">{{$event->title}}</a>
                                 </td>
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                     <form method="POST" action="/events/{{$event->id}}/confirmation">

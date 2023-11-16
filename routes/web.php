@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,6 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
 // __________ ADMIN, MANAGER AND USER __________________________________________________________________
 
 Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
-    Route::get('/', [EventController::class, 'userHome'])->name('home');
 
     // Show Create Form
     Route::get('/events/create', [EventController::class, 'create']);
@@ -68,6 +69,24 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Delete Event
     Route::delete('/events/{event}', [EventController::class, 'destroy']);
+
+    // Show All events
+    Route::get('/categories', [CategoryController::class, 'show']);
+
+    // Show Create Form
+    Route::get('/categories/create', [CategoryController::class, 'create']);
+
+    // Store Event Data
+    Route::post('/categories', [CategoryController::class, 'store']);
+
+    // Show All events
+    Route::get('/locations', [LocationController::class, 'show']);
+
+    // Show Create Form
+    Route::get('/locations/create', [LocationController::class, 'create']);
+
+    // Store Event Data
+    Route::post('/locations', [LocationController::class, 'store']);
 });
 
 // __________ EVERYONE _________________________________________________________________________________

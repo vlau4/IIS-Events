@@ -57,7 +57,10 @@ class DatabaseSeeder extends Seeder
         Event::factory(6)->create([
             'user_id' => 3,
             'category_id' => $category->id,
-            'location_id' => $location->id
+            'location_id' => $location->id,
+            'capacity' => '500',
+            'entry_fee' => '28$',
+            'confirmed' => 1
         ]);
 
         for($i = 1; $i <= 6; $i++) {

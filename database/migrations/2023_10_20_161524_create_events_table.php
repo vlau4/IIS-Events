@@ -16,8 +16,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');   // if user was deleted, his events will be deleted // TODO ma eventy vymazat v pripade vymazania uzivatela?
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->date('date');
+            $table->string('title');
+            $table->date('start');
+            $table->date('end');
+            $table->string('capacity');
+            $table->string('entry_fee')->nullable();
             $table->string('tags');
             $table->string('logo')->nullable(); // nullable() means if it does not have logo-path, it is ok. It can be NULL.
             $table->longText('description');

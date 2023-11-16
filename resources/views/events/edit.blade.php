@@ -2,35 +2,78 @@
     <x-card class="p-10 max-w-lg mx-auto mt-24">
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">Edit the Event</h2>
-            <p class="mb-4">Edit: {{$event->name}}</p>
+            <p class="mb-4">Edit: {{$event->title}}</p>
         </header>
 
         <form method="POST" action="/events/{{$event->id}}" enctype="multipart/form-data">
             @csrf {{-- protection--}}
             @method('PUT')
-            {{-- <div class="mb-6">
-                <label for="category" class="inline-block text-lg mb-2">Category</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="category" value="{{$event->category}}"/>
-                @error('category')
-                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                @enderror
-            </div> --}}
 
             <div class="mb-6">
-                <label for="name" class="inline-block text-lg mb-2">Event Name</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="name" placeholder="Example: Senior Laravel Developer" value="{{$event->name}}"/>
-                @error('name')
+                <label for="title" class="inline-block text-lg mb-2">Event Title</label>
+                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="title" placeholder="Example: Senior Laravel Developer" value="{{$event->title}}"/>
+                @error('title')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
 
-            {{-- <div class="mb-6">
-                <label for="location" class="inline-block text-lg mb-2">Event Location</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="location" placeholder="Example: Remote, Boston MA, etc" value="{{$event->location}}"/>
-                @error('location')
+            <div class="mb-6">
+                <label for="category_id" class="inline-block text-lg mb-2">Category</label>
+                <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{$event->category_id}}">
+                    <option value=""></option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
-            </div> --}}
+            </div>
+
+            <div class="mb-6">
+                <label for="location_id" class="inline-block text-lg mb-2">Location</label>
+                <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{$event->location_id}}">
+                    <option value=""></option>
+                    @foreach($locations as $location)
+                        <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</option>
+                    @endforeach
+                </select>
+                @error('location_id')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="start" class="inline-block text-lg mb-2">Start Date</label>
+                <input type="date" class="border border-gray-200 rounded p-2 w-full" name="start" value="{{$event->start}}"/>
+                @error('start')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="end" class="inline-block text-lg mb-2">End Date</label>
+                <input type="date" class="border border-gray-200 rounded p-2 w-full" name="end" value="{{$event->end}}"/>
+                @error('end')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="capacity" class="inline-block text-lg mb-2">Capacity</label>
+                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="capacity" value="{{$event->capacity}}"/>
+                @error('capacity')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="entry_fee" class="inline-block text-lg mb-2">Entry Fee</label>
+                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="entry_fee" value="{{$event->entry_fee}}"/>
+                @error('entry_fee')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
 
             <div class="mb-6">
                 <label for="tags" class="inline-block text-lg mb-2">
