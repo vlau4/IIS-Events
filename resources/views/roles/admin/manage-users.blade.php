@@ -9,11 +9,37 @@
                 @unless($users->isEmpty())
                     @foreach($users as $user)
                         <tr class="border-gray-300">
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                            <td class="px-4 py-4 border-t border-b border-gray-300 text-lg">
                                 {{$user->name}}
                             </td>
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/users/{{$user->id}}/edit" class="text-blue-400 px-6 py-2 rounded-xl"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <td class="py-4 border-t border-b border-gray-300 text-lg left-100">
+                                    <form method="POST" action="/users/{{$user->id}}" enctype="multipart/form-data">
+                                        @csrf {{-- protection--}}
+                                        @method('PUT')
+                                        <div class="flex">
+                                            <div class="mb-6 mx-4">
+                                                <select class="border border-gray-200 rounded p-2" name="role" value="{{$user->id}}">
+                                                    @if($user->role == 'user')
+                                                        <option value="0">{{$user->role}}</option>
+                                                        <option value="1">manager</option>
+                                                        <option value="2">admin</option>
+                                                    @elseif($user->role == 'manager')
+                                                        <option value="1">{{$user->role}}</option>
+                                                        <option value="0">user</option>
+                                                        <option value="2">admin</option>
+                                                    @else
+                                                        <option value="2">{{$user->role}}</option>
+                                                        <option value="0">user</option>
+                                                        <option value="1">manager</option>
+                                                    @endif
+                                                </select>
+                                            </div>
+
+                                            <div class="mx-4">
+                                                <button class="bg-sky-900 text-white rounded py-2 px-4 hover:bg-black">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
                             </td>
                         </tr>
                     @endforeach

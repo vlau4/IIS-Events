@@ -29,4 +29,18 @@ class CategoryController extends Controller
 
         return redirect('/')->with('message', 'Category created successfully!');
     }
+
+    // Show Category Confirm Section
+    public function showConfirm() {
+        return view('roles.manager.confirmCategories', ['categories' => Category::where('confirmed', 0)->get()]);
+    }
+
+    // Confirm New Categories Created by Users
+    public function confirm(Category $category) {
+        $formFields['confirmed'] = 1;
+
+        $category->update($formFields);
+
+        return back()->with('message', 'Category confirmed successfully!');
+    }
 }

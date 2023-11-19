@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Comment;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -58,5 +59,10 @@ class User extends Authenticatable
     // Relationship With Attendings
     public function attendings() {
         return $this->hasMany(Attending::class, 'user_id');
+    }
+
+    // Relationship With Comments
+    public function comments() {
+        return $this->hasMany(Comment::class, 'user_id');
     }
 }

@@ -20,9 +20,11 @@
             <div class="mb-6">
                 <label for="category_id" class="inline-block text-lg mb-2">Category</label>
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{$event->category_id}}">
-                    <option value=""></option>
+                    <option value="{{$event->category_id}}">{{$event->category->name}}</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @if($category->id != $event->category_id)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('category_id')
@@ -33,9 +35,11 @@
             <div class="mb-6">
                 <label for="location_id" class="inline-block text-lg mb-2">Location</label>
                 <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{$event->location_id}}">
-                    <option value=""></option>
+                    <option value="{{$event->location_id}}">{{$event->location->street}} {{$event->location->number}}, {{$event->location->city}}, {{$event->location->country}}</option>
                     @foreach($locations as $location)
-                        <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</option>
+                        @if($location->id != $event->location_id)
+                            <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('location_id')
@@ -109,7 +113,7 @@
             </div>
 
             <div class="mb-6">
-                <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
+                <button class="bg-sky-900 text-white rounded py-2 px-4 hover:bg-black">
                     Update Event
                 </button>
 

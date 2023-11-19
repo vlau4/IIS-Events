@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
 
@@ -26,20 +27,34 @@ Auth::routes();
 
 Route::middleware(['auth', 'user-role:admin'])->group(function() {    
 
-    // Manage Users
-    Route::get('/users/manage', [UserController::class, 'manage']);
+    // Show Manage Users
+    Route::get('/users', [UserController::class, 'manage']);
     
+    // Change User Role
+    Route::put('/users/{user}', [UserController::class, 'change']);
 });
 
 // __________ ADMIN AND MANAGER ________________________________________________________________________
 
 Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
     
-    // Show Confirm Section
+    // Show Event Confirm Section
     Route::get('/events/confirm', [EventController::class, 'showConfirm']);
+
+    // Show Category Confirm Section
+    Route::get('/categories/confirm', [CategoryController::class, 'showConfirm']);
+
+    // Show Location Confirm Section
+    Route::get('/locations/confirm', [LocationController::class, 'showConfirm']);
 
     // Confirm New Events Created by Users
     Route::post('/events/{event}/confirmation', [EventController::class, 'confirm']);
+
+    // Confirm New Categories Created by Users
+    Route::post('/categories/{category}/confirmation', [CategoryController::class, 'confirm']);
+
+    // Confirm New Locations Created by Users
+    Route::post('/locations/{location}/confirmation', [LocationController::class, 'confirm']);
 });
 
 // __________ ADMIN, MANAGER AND USER __________________________________________________________________
@@ -87,6 +102,9 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Store Event Data
     Route::post('/locations', [LocationController::class, 'store']);
+
+    // Store Comment
+    Route::post('/events/{event}/comments', [CommentController::class, 'store']);
 });
 
 // __________ EVERYONE _________________________________________________________________________________
@@ -95,4 +113,4 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 Route::get('/', [EventController::class, 'index']);
 
 // Show Single Event
-Route::get('/events/{event}', [EventController::class, 'show']);
+Route::get('/events/{event}', [EventController::class, 'show'])->name('event.show');

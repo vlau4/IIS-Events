@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Attending;
@@ -22,7 +23,8 @@ class EventController extends Controller
     // Show Single Event
     public function show(Event $event) {
         return view('events.show', [
-            'event' => $event
+            'event' => $event,
+            'comments' => Comment::where('event_id', $event->id)->get()
         ]);
     }
 
@@ -48,19 +50,19 @@ class EventController extends Controller
     // Show Create Form
     public function create() {
         return view('events.create', [
-            'categories' => Category::all(),
-            'locations' => Location::all()
+            'categories' => Category::where('confirmed', 1)->get(),
+            'locations' => Location::where('confirmed', 1)->get()
         ]);
     }
 
     // Store Event Data
     public function store(Request $request) {
         $formFields = $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:40',
             'category_id' => 'required',
             'location_id' => 'required',
             'start' => 'required|date',
-            'end' => 'required|date',
+            'end' => 'required|date|after:start',
             'capacity' => 'required',
             'entry_fee' => 'nullable',
             'tags' => 'required',
@@ -91,8 +93,8 @@ class EventController extends Controller
     public function edit(Event $event) {
         return view('events.edit', [
             'event' => $event,
-            'categories' => Category::all(),
-            'locations' => Location::all()
+            'categories' => Category::where('confirmed', 1)->get(),
+            'locations' => Location::where('confirmed', 1)->get()
         ]);
     }
 
@@ -105,11 +107,11 @@ class EventController extends Controller
         }
         
         $formFields = $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:40',
             'category_id' => 'required',
             'location_id' => 'required',
             'start' => 'required|date',
-            'end' => 'required|date',
+            'end' => 'required|date|after:start',
             'capacity' => 'required',
             'entry_fee' => 'nullable',
             'tags' => 'required',
@@ -142,10 +144,9 @@ class EventController extends Controller
         return view('events.manage', ['events' => request()->user()->events()->get()]);
     }
 
-    // Show Confirm Section
-    public function showConfirm(Event $event) {
-        // TODO: where confirm == 0
-        return view('roles.manager.confirm', ['events' => Event::all()]);
+    // Show Event Confirm Section
+    public function showConfirm() {
+        return view('roles.manager.confirmEvents', ['events' => Event::where('confirmed', 0)->get()]);
     }
 
     // Confirm New Events Created by Users

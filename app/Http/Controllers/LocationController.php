@@ -33,4 +33,18 @@ class LocationController extends Controller
 
         return redirect('/')->with('message', 'Location created successfully!');
     }
+
+    // Show Location Confirm Section
+    public function showConfirm() {
+        return view('roles.manager.confirmLocations', ['locations' => Location::where('confirmed', 0)->get()]);
+    }
+
+    // Confirm New Locations Created by Users
+    public function confirm(Location $location) {
+        $formFields['confirmed'] = 1;
+
+        $location->update($formFields);
+
+        return back()->with('message', 'Location confirmed successfully!');
+    }
 }

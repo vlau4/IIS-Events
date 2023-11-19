@@ -1,111 +1,96 @@
-{{-- <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Events') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Events') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-</body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        laravel: "#ef3b2d",
-                    },
-                },
-            },
-        };
-    </script>
-    <title>EventManager | Where a boredom does not exist.</title>
+    <title>MeetUp | Where a boredom does not exist.</title>
 </head>
 <body class="mb-48">
-    <nav class="flex justify-between items-center mb-4">
-        <a href="/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
+        {{-- <nav class="flex justify-between items-center mb-4"> --}}
+        <nav class="flex items-center mb-4">
+        <a href="/"><img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/></a>
+        <button id="createButton" data-dropdown-toggle="create" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Create <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+        </button>
+        
+        <!-- Dropdown menu -->
+        <div id="create" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="createButton">
+                <li class="hover:text-sky-700 px-2">
+                    <a href="/events/create" class="hover:text-sky-700">Post Event</a>
+                </li>
+                <li class="hover:text-sky-700 px-2">
+                    <a href="/categories/create" class="hover:text-sky-700">Create Category</a>
+                </li>
+                <li class="hover:text-sky-700 px-2">
+                    <a href="/locations/create" class="hover:text-sky-700">Create Location</a>
+                </li>
+            </ul>
+        </div>
+        @auth
+            @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
+            <button id="confirmationButton" data-dropdown-toggle="confirmation" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Confirmation <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+            </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
+                            <li class="hover:text-sky-700 px-2">
+                                <a href="/events/confirm" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Confirm Events</a>
+                            </li>
+                            <li class="hover:text-sky-700 px-2">
+                                <a href="/categories/confirm" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Confirm Categories</a>
+                            </li>
+                            <li class="hover:text-sky-700 px-2">
+                                <a href="/locations/confirm" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Confirm Locations</a>
+                            </li>
+                        </ul>
+                    </div>
+            @endif
+            
+            <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{auth()->user()->name}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+            </button>
+            
+            <!-- Dropdown menu -->
+            <div id="user" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="userButton">
+                    <li class="hover:text-sky-700 px-2">
+                        <a href="/events/mine" class="hover:text-sky-700">My Events</a>
+                    </li>
+                    <li class="hover:text-sky-700 px-2">
+                        <form method="POST" action="/logout" class="inline">
+                            @csrf
+                            <button type="submit">
+                                <i class="fa-solid fa-door-open"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            
+        @else
+        <ul class="flex space-x-6 mr-6 text-lg">
+            <li>
+                <a href="/register" class="hover:text-sky-700"><i class="fa-solid fa-user-plus"></i> Register</a>
+            </li>
+            <li>
+                <a href="/login" class="hover:text-sky-700"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+            </li>
+        </ul>
+        @endauth
+        {{-- <a href="/">
             <img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/>
         </a>
         <ul class="flex space-x-6 mr-6 text-lg">
@@ -116,28 +101,28 @@
                 </span>
             </li>
             <li>
-                <a href="/locations" class="hover:text-laravel">Locations</a>
+                <a href="/locations" class="hover:text-sky-700">Locations</a>
             </li>
             <li>
-                <a href="/categories" class="hover:text-laravel">Categories</a>
+                <a href="/categories" class="hover:text-sky-700">Categories</a>
             </li>
             <li>
-                <a href="/events/mine" class="hover:text-laravel">My Events</a>
+                <a href="/events/mine" class="hover:text-sky-700">My Events</a>
             </li>
             @if(auth()->user()->role == 'admin')
                 <li>
-                    <a href="/users/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Users</a>
+                    <a href="/users" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Users</a>
                 </li>
             @endif
             @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
                 <li>
-                    <a href="/events/confirm" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Confirm Events</a>
+                    <a href="/events/confirm" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Confirm Events</a>
                 </li>
                 <li>
-                    <a href="/events/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Events</a>
+                    <a href="/events/manage" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
                 </li>
             @endif
-            <li>
+            <li class="hover:text-sky-700">
                 <form method="POST" action="/logout" class="inline">
                     @csrf
                     <button type="submit">
@@ -147,20 +132,19 @@
             </li>
             @else
             <li>
-                <a href="/register" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i> Register</a>
+                <a href="/register" class="hover:text-sky-700"><i class="fa-solid fa-user-plus"></i> Register</a>
             </li>
             <li>
-                <a href="/login" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
+                <a href="/login" class="hover:text-sky-700"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
             </li>
             @endauth
-        </ul>
+        </ul> --}}
     </nav>
     <main>
         {{$slot}}
     </main>
 
-    <footer class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel
-        text-white h-24 mt-24 opacity-90 md:justify-center">
+    <footer class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-sky-900 text-white h-24 mt-24 opacity-90 md:justify-center">
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
         <a href="/events/create" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post Event</a>

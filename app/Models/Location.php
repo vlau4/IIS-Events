@@ -15,7 +15,8 @@ class Location extends Model
         'number',
         'city',
         'zip',
-        'country'
+        'country',
+        'confirmed'
     ];
 
     // Relationship With Events

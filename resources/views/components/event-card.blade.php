@@ -11,7 +11,9 @@
             <x-event-tags  :tagsCsv="$event->tags" />
             <div class="text-lg mt-4">
                 <i class="fa-solid fa-location-dot"></i> {{$event->location->street}} {{$event->location->number}}, {{$event->location->city}}, {{$event->location->country}}
+                <p class="text-base">{{$event->start}}</p>
             </div>
+            
         </div>
     </div>
 </x-card>

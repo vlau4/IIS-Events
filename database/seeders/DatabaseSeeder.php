@@ -44,14 +44,16 @@ class DatabaseSeeder extends Seeder
         }
 
         $category = Category::factory()->create([
-            'name' => 'food'
+            'name' => 'food',
+            'confirmed' => 1
         ]);
 
         $location = Location::factory()->create([
             'street' => 'Kvetinkova',
             'number' => '22',
             'city' => 'Brno',
-            'zip' => '60200'
+            'zip' => '60200',
+            'confirmed' => 1
         ]);
 
         Event::factory(6)->create([
