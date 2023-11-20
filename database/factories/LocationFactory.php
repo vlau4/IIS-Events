@@ -22,6 +22,7 @@ class LocationFactory extends Factory
             'city' => $this->faker->city(),
             'zip' => $this->faker->numerify('#####'),
             'country' => $this->faker->country(),
+            'confirmed' => 1
         ];
     }
 }

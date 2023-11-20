@@ -25,7 +25,7 @@ class LocationController extends Controller
             'street' => 'required',
             'number' => 'required',
             'city' => 'required',
-            'zip' => 'required',
+            'zip' => 'required|digits:5',
             'country' => 'required'
         ]);
 

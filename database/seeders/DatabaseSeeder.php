@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'User',
+                'name' => 'John User',
                 'email' => 'user@gmail.com',
                 'password' => bcrypt('123456'),
                 'role' => 0
@@ -43,27 +43,15 @@ class DatabaseSeeder extends Seeder
             User::create($user);
         }
 
-        $category = Category::factory()->create([
-            'name' => 'food',
-            'confirmed' => 1
-        ]);
-
-        $location = Location::factory()->create([
-            'street' => 'Kvetinkova',
-            'number' => '22',
-            'city' => 'Brno',
-            'zip' => '60200',
-            'confirmed' => 1
-        ]);
-
-        Event::factory(6)->create([
-            'user_id' => 3,
-            'category_id' => $category->id,
-            'location_id' => $location->id,
-            'capacity' => '500',
-            'entry_fee' => '28$',
-            'confirmed' => 1
-        ]);
+        for($i = 1; $i <= 3; $i++) {
+            $category = Category::factory()->create();
+            $location = Location::factory()->create();
+            Event::factory(2)->create([
+                'user_id' => $i,
+                'category_id' => $category->id,
+                'location_id' => $location->id
+            ]);
+        }
 
         for($i = 1; $i <= 6; $i++) {
             for($j = 1; $j <= 3; $j++) {
