@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 
 class CategoryController extends Controller
 {
@@ -16,8 +18,30 @@ class CategoryController extends Controller
 
     // Show Create Form
     public function create() {
+
+        $categories = Category::where('confirmed', 1)->get();
+
+        // recursive function for subcategories
+        $generator = function (Collection $level) use ($categories, &$generator) {
+            // sorting by id
+            foreach ($level->sortBy('id') as $item) {
+
+                // yield a single item
+                yield $item;
+    
+                // continue yielding results from the recursive call
+                yield from $generator($categories->where('parent', $item->id));
+            }
+        };
+    
+        $categories = LazyCollection::make(function () use ($categories, $generator) {
+
+            // yield from root level
+            yield from $generator($categories->where('parent', null));
+        })->flatten()->collect();
+
         return view('categories.create', [
-            'categories' => Category::all()
+            'categories' => $categories
         ]);
     }
 
@@ -27,6 +51,10 @@ class CategoryController extends Controller
             'name' => 'required',
             'parent' => 'required'
         ]);
+
+        if($formFields['parent'] != 0) {    // if it is not subcategory, tahn position is position of parent + 1
+            $formFields['position'] = (Category::where('id', $formFields['parent'])->first()->position) + 1;
+        }
 
         Category::create($formFields);
 

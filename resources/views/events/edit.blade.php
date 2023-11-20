@@ -22,8 +22,17 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{$event->category_id}}">
                     <option value="{{$event->category_id}}">{{$event->category->name}}</option>
                     @foreach($categories as $category)
-                        @if($category->id != $event->category_id)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @if($category->parent == 0)
+                            <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
+                        @else
+                            @php
+                                $text = '';
+                                for($i = $category->position; $i > 0; $i--) {
+                                    $text .= "&nbsp;";
+                                }
+                                $text .= $category->name;
+                            @endphp
+                            <option value="{{$category->id}}">{!!$text!!}</option>
                         @endif
                     @endforeach
                 </select>

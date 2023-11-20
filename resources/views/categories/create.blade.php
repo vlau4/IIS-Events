@@ -20,7 +20,18 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="parent" value="{{old('parent')}}">
                     <option value="0"></option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @if($category->parent == 0)
+                            <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
+                        @else
+                            @php
+                                $text = '';
+                                for($i = $category->position; $i > 0; $i--) {
+                                    $text .= "&nbsp;";
+                                }
+                                $text .= $category->name;
+                            @endphp
+                            <option value="{{$category->id}}">{!!$text!!}</option>
+                        @endif
                     @endforeach
                 </select>
                 {{-- @error('parent')

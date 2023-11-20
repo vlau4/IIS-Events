@@ -53,14 +53,12 @@ class EventController extends Controller
     public function create() {
 
         $categories = Category::where('confirmed', 1)->get();
-        // $categories = $categories->sortBy([
-        //     ['parent', 'asc'],
-        //     ['id', 'asc'],
-        // ]);
 
+        // recursive function for subcategories
         $generator = function (Collection $level) use ($categories, &$generator) {
-            // here we are sorting by 'id', but you can sort by another field
+            // sorting by id
             foreach ($level->sortBy('id') as $item) {
+
                 // yield a single item
                 yield $item;
     
@@ -70,9 +68,12 @@ class EventController extends Controller
         };
     
         $categories = LazyCollection::make(function () use ($categories, $generator) {
+
             // yield from root level
             yield from $generator($categories->where('parent', null));
         })->flatten()->collect();
+
+        // dd($categories);
     
         return view('events.create', [
             'categories' => $categories,
@@ -116,10 +117,33 @@ class EventController extends Controller
 
     // Show Edit Form
     public function edit(Event $event) {
+
+        $categories = Category::where('confirmed', 1)->get();
+
+        // recursive function for subcategories
+        $generator = function (Collection $level) use ($categories, &$generator) {
+            // sorting by id
+            foreach ($level->sortBy('id') as $item) {
+
+                // yield a single item
+                yield $item;
+    
+                // continue yielding results from the recursive call
+                yield from $generator($categories->where('parent', $item->id));
+            }
+        };
+    
+        $categories = LazyCollection::make(function () use ($categories, $generator) {
+
+            // yield from root level
+            yield from $generator($categories->where('parent', null));
+        })->flatten()->collect();
+
         return view('events.edit', [
             'event' => $event,
-            'categories' => Category::where('confirmed', 1)->get(),
-            'locations' => Location::where('confirmed', 1)->get()
+            'categories' => $categories,
+            'locations' => Location::where('confirmed', 1)->get(),
+            'text' => ''
         ]);
     }
 
