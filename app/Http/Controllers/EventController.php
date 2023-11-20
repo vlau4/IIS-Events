@@ -149,12 +149,18 @@ class EventController extends Controller
         return view('roles.manager.confirmEvents', ['events' => Event::where('confirmed', 0)->get()]);
     }
 
-    // Confirm New Events Created by Users
+    // Confirm New Event Created by User
     public function confirm(Event $event) {
         $formFields['confirmed'] = 1;
 
         $event->update($formFields);
 
-        return back()->with('message', 'Event confirmed successfully!');
+        return back()->with('message', 'Event was confirmed successfully!');
+    }
+
+    // Unconfirm New Events Created by User
+    public function unconfirm(Event $event) {
+        $event->delete();
+        return back()->with('message', 'Event was unconfirmed successfully!');
     }
 }

@@ -1,7 +1,7 @@
 <x-layout>
     <x-card class="p-10">
         <header>
-            <h1 class="text-3xl text-center font-bold my-6 uppercase">Manage Gigs</h1>
+            <h1 class="text-3xl text-center font-bold my-6 uppercase">Manage Events</h1>
         </header>
 
         <table class="w-full table-auto rounded-sm">

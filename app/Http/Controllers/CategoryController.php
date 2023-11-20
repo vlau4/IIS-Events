@@ -35,12 +35,18 @@ class CategoryController extends Controller
         return view('roles.manager.confirmCategories', ['categories' => Category::where('confirmed', 0)->get()]);
     }
 
-    // Confirm New Categories Created by Users
+    // Confirm New Category Created by User
     public function confirm(Category $category) {
         $formFields['confirmed'] = 1;
 
         $category->update($formFields);
 
-        return back()->with('message', 'Category confirmed successfully!');
+        return back()->with('message', 'Category was confirmed successfully!');
+    }
+
+    // Unconfirm New Category Created by User
+    public function unconfirm(Category $category) {
+        $category->delete();
+        return back()->with('message', 'Category was unconfirmed successfully!');
     }
 }

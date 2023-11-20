@@ -47,14 +47,23 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
     // Show Location Confirm Section
     Route::get('/locations/confirm', [LocationController::class, 'showConfirm']);
 
-    // Confirm New Events Created by Users
+    // Confirm New Event Created by User
     Route::post('/events/{event}/confirmation', [EventController::class, 'confirm']);
 
-    // Confirm New Categories Created by Users
+    // Confirm New Categorie Created by User
     Route::post('/categories/{category}/confirmation', [CategoryController::class, 'confirm']);
 
-    // Confirm New Locations Created by Users
+    // Confirm New Location Created by User
     Route::post('/locations/{location}/confirmation', [LocationController::class, 'confirm']);
+
+    // Unconfirm New Event Created by User
+    Route::delete('/events/{event}/unconfirm', [EventController::class, 'unconfirm'])->name('event.unconfirm');
+
+    // Unconfirm New Categorie Created by User
+    Route::delete('/categories/{category}/unconfirm', [CategoryController::class, 'unconfirm'])->name('category.unconfirm');
+
+    // Unconfirm New Location Created by User
+    Route::delete('/locations/{location}/unconfirm', [LocationController::class, 'unconfirm'])->name('location.unconfirm');
 });
 
 // __________ ADMIN, MANAGER AND USER __________________________________________________________________

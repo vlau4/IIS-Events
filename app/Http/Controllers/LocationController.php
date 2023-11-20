@@ -39,12 +39,18 @@ class LocationController extends Controller
         return view('roles.manager.confirmLocations', ['locations' => Location::where('confirmed', 0)->get()]);
     }
 
-    // Confirm New Locations Created by Users
+    // Confirm New Location Created by User
     public function confirm(Location $location) {
         $formFields['confirmed'] = 1;
 
         $location->update($formFields);
 
-        return back()->with('message', 'Location confirmed successfully!');
+        return back()->with('message', 'Location was confirmed successfully!');
+    }
+
+    // Unconfirm New Location Created by User
+    public function unconfirm(Location $location) {
+        $location->delete();
+        return back()->with('message', 'Location was unconfirmed successfully!');
     }
 }
