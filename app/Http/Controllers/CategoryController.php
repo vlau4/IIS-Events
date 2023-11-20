@@ -16,13 +16,16 @@ class CategoryController extends Controller
 
     // Show Create Form
     public function create() {
-        return view('categories.create');
+        return view('categories.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     // Store Category Data
     public function store(Request $request) {
         $formFields = $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'parent' => 'required'
         ]);
 
         Category::create($formFields);

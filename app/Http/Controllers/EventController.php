@@ -10,6 +10,8 @@ use App\Models\Location;
 use App\Models\Attending;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 
 class EventController extends Controller
 {
@@ -49,8 +51,31 @@ class EventController extends Controller
 
     // Show Create Form
     public function create() {
+
+        $categories = Category::where('confirmed', 1)->get();
+        // $categories = $categories->sortBy([
+        //     ['parent', 'asc'],
+        //     ['id', 'asc'],
+        // ]);
+
+        $generator = function (Collection $level) use ($categories, &$generator) {
+            // here we are sorting by 'id', but you can sort by another field
+            foreach ($level->sortBy('id') as $item) {
+                // yield a single item
+                yield $item;
+    
+                // continue yielding results from the recursive call
+                yield from $generator($categories->where('parent', $item->id));
+            }
+        };
+    
+        $categories = LazyCollection::make(function () use ($categories, $generator) {
+            // yield from root level
+            yield from $generator($categories->where('parent', null));
+        })->flatten()->collect();
+    
         return view('events.create', [
-            'categories' => Category::where('confirmed', 1)->get(),
+            'categories' => $categories,
             'locations' => Location::where('confirmed', 1)->get()
         ]);
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent')->default(0);
             $table->string('name');
             $table->tinyInteger('confirmed')->default(0); // 0 - not confirmed, 1 - confirmed
             $table->timestamps();

@@ -16,6 +16,19 @@
             </div>
 
             <div class="mb-6">
+                <label for="parent" class="inline-block text-lg mb-2">Parent Category</label>
+                <select class="border border-gray-200 rounded p-2 w-full" name="parent" value="{{old('parent')}}">
+                    <option value="0"></option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+                {{-- @error('parent')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror --}}
+            </div>
+
+            <div class="mb-6">
                 <button class="bg-sky-900 text-white rounded py-2 px-4 hover:bg-black">Create Category</button>
 
                 <a href="/" class="text-black ml-4"> Back </a>
