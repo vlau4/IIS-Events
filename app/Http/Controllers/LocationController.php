@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
-    // Show Locations
-    public function show() {
-        return view('locations.show', [
-            'locations' => Location::latest()->paginate(6)
-        ]);
-    }
-
     // Show Create Form
     public function create() {
         return view('locations.create');

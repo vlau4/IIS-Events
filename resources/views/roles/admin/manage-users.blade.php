@@ -13,7 +13,7 @@
                                 {{$user->name}}
                             </td>
                             <td class="py-4 border-t border-b border-gray-300 text-lg left-100">
-                                    <form method="POST" action="/users/{{$user->id}}" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('user', $user) }}" enctype="multipart/form-data">
                                         @csrf {{-- protection--}}
                                         @method('PUT')
                                         <div class="flex">
@@ -47,7 +47,6 @@
                     <tr class="border-gray-300">
                         <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                             <p class="text-center">No users found</p>
-                            <a href="/events/create" class="absolute right-10 border border-gray-300 py-2 px-5">Post Job</a>
                         </td>
                     </tr>
                 @endunless

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
-            $table->tinyInteger('attending')->default('0');     //0 is user not attend the event, 1 is user attend the event
             $table->timestamps();
         });
     }

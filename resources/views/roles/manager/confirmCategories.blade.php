@@ -9,11 +9,9 @@
                 @unless($categories->isEmpty())
                     @foreach($categories as $category)
                         <tr class="border-gray-300">
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">{{$category->name}}</td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/categories/{{$category->id}}">{{$category->name}}</a>
-                            </td>
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <form method="POST" action="/categories/{{$category->id}}/confirmation">
+                                <form method="POST" action="{{ route('category.confirm', $category) }}">
                                     @csrf
                                     <button class="text-green-600">
                                         <i class="fa-solid fa-check"></i> Confirm</a>

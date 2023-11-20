@@ -40,13 +40,19 @@ class EventController extends Controller
 
     // Add To My Events
     public function add(Event $event) {
-        $attending = Attending::where('user_id', auth()->id())->where('event_id', $event->id)->first();
-
-        $formFields['attending'] = 1;
-
-        $attending->update($formFields);
+        // $attending = Attending::where('user_id', auth()->id())->where('event_id', $event->id)->first();
+        $attending = Attending::create([
+            'user_id' => auth()->id(),
+            'event_id'=> $event->id
+        ]);
 
         return redirect('/events/mine')->with('message', 'Event added to my events successfully!');
+    }
+
+    public function remove(Event $event) {
+
+        (Attending::where('event_id', $event->id)->where('user_id', auth()->user()->id)->first())->delete();
+        return back()->with('message', 'Event removed from my events successfully!');
     }
 
     // Show Create Form

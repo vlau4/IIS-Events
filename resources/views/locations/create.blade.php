@@ -5,7 +5,7 @@
             <p class="mb-4">for new events</p>
         </header>
 
-        <form method="POST" action="/locations" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('locations.create') }}" enctype="multipart/form-data">
             @csrf {{-- protection--}}
             <div class="mb-6">
                 <label for="street" class="inline-block text-lg mb-2">Street</label>

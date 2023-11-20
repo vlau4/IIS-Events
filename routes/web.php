@@ -28,10 +28,10 @@ Auth::routes();
 Route::middleware(['auth', 'user-role:admin'])->group(function() {    
 
     // Show Manage Users
-    Route::get('/users', [UserController::class, 'manage']);
+    Route::get('/users', [UserController::class, 'manage'])->name('users');
     
     // Change User Role
-    Route::put('/users/{user}', [UserController::class, 'change']);
+    Route::put('/users/{user}', [UserController::class, 'change'])->name('user');
 });
 
 // __________ ADMIN AND MANAGER ________________________________________________________________________
@@ -39,22 +39,22 @@ Route::middleware(['auth', 'user-role:admin'])->group(function() {
 Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
     
     // Show Event Confirm Section
-    Route::get('/events/confirm', [EventController::class, 'showConfirm']);
+    Route::get('/events/confirmation', [EventController::class, 'showConfirm'])->name('event.confirm.show');
 
     // Show Category Confirm Section
-    Route::get('/categories/confirm', [CategoryController::class, 'showConfirm']);
+    Route::get('/categories/confirmation', [CategoryController::class, 'showConfirm'])->name('category.confirm.show');
 
     // Show Location Confirm Section
-    Route::get('/locations/confirm', [LocationController::class, 'showConfirm']);
+    Route::get('/locations/confirmation', [LocationController::class, 'showConfirm'])->name('location.confirm.show');
 
     // Confirm New Event Created by User
-    Route::post('/events/{event}/confirmation', [EventController::class, 'confirm']);
+    Route::post('/events/{event}/confirm', [EventController::class, 'confirm'])->name('event.confirm');
 
-    // Confirm New Categorie Created by User
-    Route::post('/categories/{category}/confirmation', [CategoryController::class, 'confirm']);
+    // Confirm New Category Created by User
+    Route::post('/categories/{category}/confirm', [CategoryController::class, 'confirm'])->name('category.confirm');
 
     // Confirm New Location Created by User
-    Route::post('/locations/{location}/confirmation', [LocationController::class, 'confirm']);
+    Route::post('/locations/{location}/confirm', [LocationController::class, 'confirm'])->name('location.confirm');
 
     // Unconfirm New Event Created by User
     Route::delete('/events/{event}/unconfirm', [EventController::class, 'unconfirm'])->name('event.unconfirm');
@@ -70,56 +70,53 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
 
 Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
-    // Show Create Form
-    Route::get('/events/create', [EventController::class, 'create']);
+    // Show Event Create Form
+    Route::get('/events/create', [EventController::class, 'create'])->name('event.create');
 
     // Store Event Data
-    Route::post('/events', [EventController::class, 'store']);
+    Route::post('/events', [EventController::class, 'store'])->name('event.store');
 
     // Show Edit Form
-    Route::get('/events/{event}/edit', [EventController::class, 'edit']);
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit');
 
     // Add To My Events
-    Route::put('/add/{event}', [EventController::class, 'add']);
+    Route::post('/add/{event}', [EventController::class, 'add'])->name('event.add');
+
+    // Remove From My Events
+    Route::post('/remove/{event}', [EventController::class, 'remove'])->name('event.remove');
 
     // Manage Events
-    Route::get('/events/manage', [EventController::class, 'manage']);
+    Route::get('/events/manage', [EventController::class, 'manage'])->name('events.manage');
 
     //Show My Events
-    Route::get('/events/mine', [EventController::class, 'showMyEvents']);
+    Route::get('/events/mine', [EventController::class, 'showMyEvents'])->name('events.mine');
 
     // Update Event
-    Route::put('/events/{event}', [EventController::class, 'update']);
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('event.update');
 
     // Delete Event
-    Route::delete('/events/{event}', [EventController::class, 'destroy']);
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy');
 
-    // Show All events
-    Route::get('/categories', [CategoryController::class, 'show']);
+    // Show Category Create Form
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create');
 
-    // Show Create Form
-    Route::get('/categories/create', [CategoryController::class, 'create']);
+    // Store Category Data
+    Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
 
-    // Store Event Data
-    Route::post('/categories', [CategoryController::class, 'store']);
+    // Show Location Create Form
+    Route::get('/locations/create', [LocationController::class, 'create'])->name('location.create');
 
-    // Show All events
-    Route::get('/locations', [LocationController::class, 'show']);
-
-    // Show Create Form
-    Route::get('/locations/create', [LocationController::class, 'create']);
-
-    // Store Event Data
-    Route::post('/locations', [LocationController::class, 'store']);
+    // Store Location Data
+    Route::post('/locations', [LocationController::class, 'store'])->name('location.store');
 
     // Store Comment
-    Route::post('/events/{event}/comments', [CommentController::class, 'store']);
+    Route::post('/events/{event}/comments', [CommentController::class, 'store'])->name('comment.store');
 });
 
 // __________ EVERYONE _________________________________________________________________________________
 
 // Show All events
-Route::get('/', [EventController::class, 'index']);
+Route::get('/', [EventController::class, 'index'])->name('home');
 
 // Show Single Event
 Route::get('/events/{event}', [EventController::class, 'show'])->name('event.show');

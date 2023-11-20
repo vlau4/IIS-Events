@@ -9,13 +9,6 @@ use Illuminate\Support\LazyCollection;
 
 class CategoryController extends Controller
 {
-    // Show Categories
-    public function show() {
-        return view('categories.show', [
-            'categories' => Category::latest()->paginate(6)
-        ]);
-    }
-
     // Show Create Form
     public function create() {
 

@@ -21,15 +21,12 @@
                         @if($event->entry_fee)
                             <p> <b>Entry Fee:</b> {{$event->entry_fee}}</p>
                         @endif
-                        <form method="POST" action="/add/{{$event->id}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('event.add', $event) }}" enctype="multipart/form-data">
                             @csrf {{-- protection--}}
-                            @method('PUT')
                             <button class="bg-sky-900 text-white mt-4 rounded-xl py-2 px-10 hover:bg-black">
                                 Add To My Events
                             </button>
                         </form>
-                        {{-- <a href="/events/mine/add" class="block bg-sky-900 text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-plus"></i> Add To My Events</a> --}}
-                        {{-- <a href="mailto:{{$event->email}}" class="block bg-black text-white mt-6 py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-envelope"></i> Contact Organizer</a> --}}
                     </div>
                 </div>
                 <p>From {{$event->start}} to {{$event->end}}</p>
@@ -39,10 +36,10 @@
         @if(auth())
             @if(auth()->user()->id == $event->user_id)
                 <x-card class="mt-4 p-2 flex space-x-6 text-sky-700">
-                    <a href="/events/{{$event->id}}/edit">
+                    <a href="{{ Route('event.edit', $event) }}">
                         <i class="fa-solid fa-pencil"></i> Edit
                     </a>
-                    <form method="POST" action="/events/{{$event->id}}">
+                    <form method="POST" action="{{ route('event.destroy', $event) }}">
                         @csrf
                         @method('DELETE')
                         <button class="text-red-500">

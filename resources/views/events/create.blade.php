@@ -1,11 +1,10 @@
 <x-layout>
     <x-card class="p-10 max-w-lg mx-auto mt-24">
         <header class="text-center">
-            <h2 class="text-2xl font-bold uppercase mb-1">Create a Gig</h2>
-            <p class="mb-4">Post a gig to find a developer</p>
+            <h2 class="text-2xl font-bold uppercase mb-1">Create an Event</h2>
         </header>
 
-        <form method="POST" action="/events" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('event.store') }}" enctype="multipart/form-data">
             @csrf {{-- protection--}}
 
             <div class="mb-6">

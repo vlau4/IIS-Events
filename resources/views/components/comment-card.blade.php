@@ -3,7 +3,7 @@
 <div class="">
     <x-card class="px-10">
         <div class="m-2">
-            <form action="/events/{{$event->id}}/comments" method="post">
+            <form action="{{ route('comment.store', $event) }}" method="post">
                 @csrf {{-- protection --}}
                 <div class="mt-4 text-lg">
                     <textarea name="content" rows="1" cols="100" class="text-base"></textarea>

@@ -5,7 +5,7 @@
             <p class="mb-4">Edit: {{$event->title}}</p>
         </header>
 
-        <form method="POST" action="/events/{{$event->id}}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('event.update', $event) }}" enctype="multipart/form-data">
             @csrf {{-- protection--}}
             @method('PUT')
 
@@ -126,7 +126,7 @@
                     Update Event
                 </button>
 
-                <a href="/events/{{$event->id}}" class="text-black ml-4"> Back </a>
+                <a href="{{ Route('event.show', $event) }}" class="text-black ml-4"> Back </a>
             </div>
         </form>
     </x-card>

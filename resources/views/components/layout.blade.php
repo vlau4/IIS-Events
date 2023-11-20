@@ -25,13 +25,13 @@
         <div id="create" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="createButton">
                 <li class="hover:text-sky-700 px-2">
-                    <a href="/events/create" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Event</a>
+                    <a href="{{ Route('event.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Event</a>
                 </li>
                 <li class="hover:text-sky-700 px-2">
-                    <a href="/categories/create" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Category</a>
+                    <a href="{{ Route('category.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Category</a>
                 </li>
                 <li class="hover:text-sky-700 px-2">
-                    <a href="/locations/create" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Location</a>
+                    <a href="{{ Route('location.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Location</a>
                 </li>
             </ul>
         </div>
@@ -46,13 +46,13 @@
                     <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
                             <li class="hover:text-sky-700 px-2">
-                                <a href="/events/confirm" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
+                                <a href="{{ Route('event.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
                             </li>
                             <li class="hover:text-sky-700 px-2">
-                                <a href="/categories/confirm" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>
+                                <a href="{{ Route('category.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>
                             </li>
                             <li class="hover:text-sky-700 px-2">
-                                <a href="/locations/confirm" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
+                                <a href="{{ Route('location.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
                             </li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
             @if(auth()->user()->role == 'admin')
                 <ul>
                     <li class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700">
-                        <a href="/users" class=""><i class="fa-solid fa-gear"></i> Manage Users</a>
+                        <a href="{{ Route('users') }}" class=""><i class="fa-solid fa-gear"></i> Manage Users</a>
                     </li>
                 </ul>
             @endif
@@ -75,10 +75,10 @@
             <div id="user" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="userButton">
                     <li class="hover:text-sky-700 px-2">
-                        <a href="/events/mine" class="hover:text-sky-700"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                        <a href="{{ Route('events.mine') }}" class="hover:text-sky-700"><i class="fa-solid fa-calendar-days"></i> My Events</a>
                     </li>
                     <li class="hover:text-sky-700 px-2">
-                        <a href="/events/manage" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
+                        <a href="{{ Route('events.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
                     </li>
                     <li class="hover:text-sky-700 px-2">
                         <form method="POST" action="/logout" class="inline">
@@ -158,7 +158,7 @@
     <footer class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-sky-900 text-white h-24 mt-24 opacity-90 md:justify-center">
         <p class="ml-2">Copyright &copy; 2023, All Rights reserved</p>
 
-        <a href="/events/create" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post Event</a>
+        <a href="{{ Route('event.create') }}" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post Event</a>
     </footer>
     <x-flash-message></x-flash-message>
 </body>

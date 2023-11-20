@@ -9,11 +9,9 @@
                 @unless($locations->isEmpty())
                     @foreach($locations as $location)
                         <tr class="border-gray-300">
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/locations/{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</a>
-                            </td>
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <form method="POST" action="/locations/{{$location->id}}/confirmation">
+                                <form method="POST" action="{{ route('location.confirm', $location) }}">
                                     @csrf
                                     <button class="text-green-600">
                                         <i class="fa-solid fa-check"></i> Confirm</a>

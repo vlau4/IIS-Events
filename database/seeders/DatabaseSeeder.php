@@ -53,13 +53,13 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for($i = 1; $i <= 6; $i++) {
-            for($j = 1; $j <= 3; $j++) {
-                Attending::factory()->create([
-                    'user_id' => $j,
-                    'event_id' => $i
-                ]);
-            }
-        }
+        // for($i = 1; $i <= 6; $i++) {
+        //     for($j = 1; $j <= 3; $j++) {
+        //         Attending::factory()->create([
+        //             'user_id' => $j,
+        //             'event_id' => $i
+        //         ]);
+        //     }
+        // }
     }
 }
