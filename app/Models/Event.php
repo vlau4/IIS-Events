@@ -38,6 +38,14 @@ class Event extends Model
                 ->orwhere('tags', 'like', '%' . request('search') . '%')
                 ->orwhere('description', 'like', '%' . request('search') . '%');
         }
+
+        if($filters['category_id'] ?? false) {
+            $query->where('category_id', 'like', '%' . request('category_id') . '%');
+        }
+
+        if($filters['location_id'] ?? false) {
+            $query->where('location_id', 'like', '%' . request('location_id') . '%');
+        }
     }
 
     // Relationship To User

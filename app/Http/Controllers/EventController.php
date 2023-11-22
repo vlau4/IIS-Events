@@ -19,7 +19,7 @@ class EventController extends Controller
     // Show All Events
     public function index() {
         return view('home', [
-            'events' => Event::where('confirmed', '1')->latest()->filter(request(['tag', 'search']))->paginate(6)
+            'events' => Event::where('confirmed', '1')->latest()->filter(request(['tag', 'category_id', 'location_id', 'search']))->paginate(6)
         ]);
     }
 
