@@ -101,55 +101,6 @@
             </li>
         </ul>
         @endauth
-        {{-- <a href="/">
-            <img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/>
-        </a>
-        <ul class="flex space-x-6 mr-6 text-lg">
-            @auth
-            <li>
-                <span class="font-bold uppercase">
-                    {{auth()->user()->name}}
-                </span>
-            </li>
-            <li>
-                <a href="/locations" class="hover:text-sky-700">Locations</a>
-            </li>
-            <li>
-                <a href="/categories" class="hover:text-sky-700">Categories</a>
-            </li>
-            <li>
-                <a href="/events/mine" class="hover:text-sky-700">My Events</a>
-            </li>
-            @if(auth()->user()->role == 'admin')
-                <li>
-                    <a href="/users" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Users</a>
-                </li>
-            @endif
-            @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
-                <li>
-                    <a href="/events/confirm" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Confirm Events</a>
-                </li>
-                <li>
-                    <a href="/events/manage" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
-                </li>
-            @endif
-            <li class="hover:text-sky-700">
-                <form method="POST" action="/logout" class="inline">
-                    @csrf
-                    <button type="submit">
-                        <i class="fa-solid fa-door-open"></i> Logout
-                    </button>
-                </form>
-            </li>
-            @else
-            <li>
-                <a href="/register" class="hover:text-sky-700"><i class="fa-solid fa-user-plus"></i> Register</a>
-            </li>
-            <li>
-                <a href="/login" class="hover:text-sky-700"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
-            </li>
-            @endauth
-        </ul> --}}
     </nav>
     <main>
         {{$slot}}

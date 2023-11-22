@@ -13,8 +13,7 @@ class Attending extends Model
 
     protected $fillable = [
         'user_id',
-        'event_id',
-        'attending'
+        'event_id'
     ];
 
     // // Relationship To User

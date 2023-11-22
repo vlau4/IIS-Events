@@ -11,6 +11,7 @@ use App\Models\Attending;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\LazyCollection;
 
 class EventController extends Controller
@@ -30,13 +31,54 @@ class EventController extends Controller
         ]);
     }
 
-    // Show My Events
-    public function showMyEvents() {
-        return view('roles.user.myEvents', [
-            'events' => Event::latest()->paginate(6),
-            'attendings' => Attending::where('user_id', auth()->id())->get()
-        ]);
+    public function calendar(Request $request, int $index, $events) {
+        //$events = Attending::where('user_id', auth()->user()->id)->get();
+
+        // if($index+1 >= count($events)) {
+        //     $data = Event::whereDate('start', '>=', $request->start)
+        //     ->whereDate('end',   '<=', $request->end)
+        //     ->where('id', $events[$index]->event_id)
+        //     ->get(['id', 'title', 'start', 'end']);
+        //     error_log(response()->json($data));
+
+        //     return response()->json($data);
+        // }
+        // $data = Event::whereDate('start', '>=', $request->start)
+        // ->whereDate('end',   '<=', $request->end)
+        // ->where('id', $events[$index]->event_id)
+        // ->get(['id', 'title', 'start', 'end']);
+        // error_log(response()->json($data));
+
+        // $this->calendar($request, $index+1, $events);
+        // return response()->json($data);
+        
     }
+
+    // Show My Events
+    public function showMyEvents(Request $request) {
+
+        $events = Attending::where('user_id', auth()->user()->id)->get(['event_id']);
+        
+        // $index = 0;
+
+        if ($request->ajax()) {
+            $data = Event::whereDate('start', '>=', $request->start)
+            ->whereDate('end',   '<=', $request->end)
+            ->whereIn('id', $events)
+            ->get(['id', 'title', 'start', 'end']);
+            return response()->json($data);
+            
+        }
+
+        return view('roles.user.myEvents');
+
+        // return view('roles.user.myEvents', [
+        //     'events' => Event::latest()->all(),
+        //     'attendings' => Attending::where('user_id', auth()->id())->get()
+        // ]);
+    }
+
+    
 
     // Add To My Events
     public function add(Event $event) {
@@ -108,15 +150,6 @@ class EventController extends Controller
         $formFields['user_id'] = auth()->id();
 
         $event = Event::create($formFields);
-        $formFields['event_id'] = $event->id;
-
-        $users = User::all();
-
-        // for every user create attending to the new event
-        foreach($users as $user) {
-            $formFields['user_id'] = $user->id;
-            Attending::create($formFields);
-        }
 
         return redirect('/')->with('message', 'Event created successfully!');
     }
