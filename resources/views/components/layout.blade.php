@@ -37,25 +37,42 @@
         </div>
         @auth
             @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
-            <button id="confirmationButton" data-dropdown-toggle="confirmation" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Confirmation <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-            </svg>
-            </button>
-                    
-                    <!-- Dropdown menu -->
-                    <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
-                            <li class="hover:text-sky-700 px-2">
-                                <a href="{{ Route('event.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
-                            </li>
-                            <li class="hover:text-sky-700 px-2">
-                                <a href="{{ Route('category.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>
-                            </li>
-                            <li class="hover:text-sky-700 px-2">
-                                <a href="{{ Route('location.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
-                            </li>
-                        </ul>
-                    </div>
+                <button id="confirmationButton" data-dropdown-toggle="confirmation" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Confirmation <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                        
+                <!-- Dropdown menu -->
+                <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
+                        <li class="hover:text-sky-700 px-2">
+                            <a href="{{ Route('event.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
+                        </li>
+                        <li class="hover:text-sky-700 px-2">
+                            <a href="{{ Route('category.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>
+                        </li>
+                        <li class="hover:text-sky-700 px-2">
+                            <a href="{{ Route('location.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <button id="manageButton" data-dropdown-toggle="manage" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Manage Categories <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                        
+                <!-- Dropdown menu -->
+                <div id="manage" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="manageButton">
+                        <li class="hover:text-sky-700 px-2">
+                            <a href="{{ Route('categories.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Manage Categories</a>
+                        </li>
+                        <li class="hover:text-sky-700 px-2">
+                            <a href="{{ Route('locations.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Manage Locations</a>
+                        </li>
+                    </ul>
+                </div>
             @endif
 
             @if(auth()->user()->role == 'admin')
@@ -112,5 +129,6 @@
         <a href="{{ Route('event.create') }}" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post Event</a>
     </footer>
     <x-flash-message></x-flash-message>
+    <x-flash-error></x-flash-error>
 </body>
 </html>

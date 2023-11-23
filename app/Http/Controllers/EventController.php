@@ -25,33 +25,13 @@ class EventController extends Controller
 
     // Show Single Event
     public function show(Event $event) {
+
         return view('events.show', [
             'event' => $event,
-            'comments' => Comment::where('event_id', $event->id)->get()
+            'comments' => Comment::where('event_id', $event->id)->get(),
+            'today' => date("Y-m-d"),
+            'attending' => Attending::where('event_id', $event->id)->where('user_id', auth()->user()->id)->first()
         ]);
-    }
-
-    public function calendar(Request $request, int $index, $events) {
-        //$events = Attending::where('user_id', auth()->user()->id)->get();
-
-        // if($index+1 >= count($events)) {
-        //     $data = Event::whereDate('start', '>=', $request->start)
-        //     ->whereDate('end',   '<=', $request->end)
-        //     ->where('id', $events[$index]->event_id)
-        //     ->get(['id', 'title', 'start', 'end']);
-        //     error_log(response()->json($data));
-
-        //     return response()->json($data);
-        // }
-        // $data = Event::whereDate('start', '>=', $request->start)
-        // ->whereDate('end',   '<=', $request->end)
-        // ->where('id', $events[$index]->event_id)
-        // ->get(['id', 'title', 'start', 'end']);
-        // error_log(response()->json($data));
-
-        // $this->calendar($request, $index+1, $events);
-        // return response()->json($data);
-        
     }
 
     // Show My Events
@@ -71,19 +51,18 @@ class EventController extends Controller
         }
 
         return view('roles.user.myEvents');
-
-        // return view('roles.user.myEvents', [
-        //     'events' => Event::latest()->all(),
-        //     'attendings' => Attending::where('user_id', auth()->id())->get()
-        // ]);
     }
 
     
 
     // Add To My Events
     public function add(Event $event) {
-        // $attending = Attending::where('user_id', auth()->id())->where('event_id', $event->id)->first();
-        $attending = Attending::create([
+        
+        if(Attending::where('user_id', auth()->id())->where('event_id', $event->id)->first()) {
+            return back()->with('err', 'This event is already in your events!');
+        }
+
+        Attending::create([
             'user_id' => auth()->id(),
             'event_id'=> $event->id
         ]);
@@ -154,7 +133,7 @@ class EventController extends Controller
         return redirect('/')->with('message', 'Event created successfully!');
     }
 
-    // Show Edit Form
+    // Show Event Edit Form
     public function edit(Event $event) {
 
         $categories = Category::where('confirmed', 1)->get();
@@ -214,7 +193,7 @@ class EventController extends Controller
 
         $event->update($formFields);
 
-        return redirect('/')->with('message', 'Event updated successfully!');
+        return redirect('/')->with('message', 'Event was updated successfully!');
     }
 
     // Delete Event

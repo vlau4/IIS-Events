@@ -59,11 +59,29 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
     // Unconfirm New Event Created by User
     Route::delete('/events/{event}/unconfirm', [EventController::class, 'unconfirm'])->name('event.unconfirm');
 
-    // Unconfirm New Categorie Created by User
+    // Unconfirm New Category Created by User
     Route::delete('/categories/{category}/unconfirm', [CategoryController::class, 'unconfirm'])->name('category.unconfirm');
 
     // Unconfirm New Location Created by User
     Route::delete('/locations/{location}/unconfirm', [LocationController::class, 'unconfirm'])->name('location.unconfirm');
+
+    // Manage Categories
+    Route::get('/categories/manage', [CategoryController::class, 'manage'])->name('categories.manage');
+
+    // Show Category Edit Form
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+
+    // Update Category
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
+
+    // Manage Locations
+    Route::get('/locations/manage', [LocationController::class, 'manage'])->name('locations.manage');
+
+    // Show Location Edit Form
+    Route::get('/locations/{location}/edit', [LocationController::class, 'edit'])->name('location.edit');
+
+    // Update Location
+    Route::put('/locations/{location}', [LocationController::class, 'update'])->name('location.update');
 });
 
 // __________ ADMIN, MANAGER AND USER __________________________________________________________________
@@ -76,7 +94,7 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
     // Store Event Data
     Route::post('/events', [EventController::class, 'store'])->name('event.store');
 
-    // Show Edit Form
+    // Show Event Edit Form
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit');
 
     // Add To My Events

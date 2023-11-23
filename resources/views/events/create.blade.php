@@ -44,7 +44,7 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{old('location_id')}}">
                     <option value=""></option>
                     @foreach($locations as $location)
-                        <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}}, {{$location->country}}</option>
+                        <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
                     @endforeach
                 </select>
                 @error('location_id')

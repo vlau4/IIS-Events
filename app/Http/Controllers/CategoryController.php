@@ -73,4 +73,59 @@ class CategoryController extends Controller
         $category->delete();
         return back()->with('message', 'Category was unconfirmed successfully!');
     }
+
+    // Show Edit Form
+    public function edit(Category $category) {
+        $categories = Category::where('confirmed', 1)->get();
+
+        // recursive function for subcategories
+        $generator = function (Collection $level) use ($categories, &$generator) {
+            // sorting by id
+            foreach ($level->sortBy('id') as $item) {
+
+                // yield a single item
+                yield $item;
+    
+                // continue yielding results from the recursive call
+                yield from $generator($categories->where('parent', $item->id));
+            }
+        };
+    
+        $categories = LazyCollection::make(function () use ($categories, $generator) {
+
+            // yield from root level
+            yield from $generator($categories->where('parent', null));
+        })->flatten()->collect();
+
+        // dd($categories);
+
+        return view('roles.manager.editCategory', [
+            'categories' => $categories,
+            'ctg' => $category,
+            'text' => ''
+        ]);
+    }
+
+    // Update Event
+    public function update(Request $request, Category $category) {
+
+        // Make sure logged in user is admin or manager
+        // if($event->user_id != auth()->id()) {
+        //     abort(403, 'Unauthorized Action');
+        // }
+        
+        $formFields = $request->validate([
+            'name' => 'required',
+            'parent' => 'required'
+        ]);
+
+        $category->update($formFields);
+
+        return redirect('/categories/manage')->with('message', 'Category was updated successfully!');
+    }
+
+    // Manage Categories
+    public function manage() {
+        return view('roles.manager.manageCategories', ['categories' => Category::All()]);
+    }
 }
