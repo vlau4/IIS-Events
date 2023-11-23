@@ -33,6 +33,9 @@ Route::middleware(['auth', 'user-role:admin'])->group(function() {
     
     // Change User Role
     Route::put('/users/{user}', [UserController::class, 'change'])->name('user');
+
+    // Destroy Accounts
+    Route::post('/users/{user}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 // __________ ADMIN AND MANAGER ________________________________________________________________________
@@ -136,6 +139,12 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Store Comment
     Route::post('/events/{event}/comments', [CommentController::class, 'store'])->name('comment.store');
+
+    // Settings
+    Route::get('/settings', [UserController::class, 'settings'])->name('settings');
+
+    // Delete Your Account
+    Route::post('/delete', [UserController::class, 'delete'])->name('delete');
 });
 
 // __________ EVERYONE _________________________________________________________________________________

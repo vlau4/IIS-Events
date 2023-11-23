@@ -98,6 +98,9 @@
                         <a href="{{ Route('events.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
                     </li>
                     <li class="hover:text-sky-700 px-2">
+                        <a href="{{ Route('settings') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="hover:text-sky-700 px-2">
                         <form method="POST" action="/logout" class="inline">
                             @csrf
                             <button type="submit">

@@ -26,6 +26,29 @@ class UserController extends Controller
         return redirect('/users')->with('message', 'The role was successfully changed!');
     }
 
+    // Settings
+    public function settings(Request $request, User $user) {
+
+        //the validation is not neccessery
+        User::where('id', $user->id)->update([
+            'role' => $request->role
+        ]);
+
+        return view('roles.user.settings');
+    }
+
+    // Delete Account
+    public function delete() {
+        User::where('id', auth()->user()->id)->delete();
+        return redirect('/')->with('message', 'Your account was successfully deleted!');
+    }
+
+    // Delete Account
+    public function destroy(User $user) {
+        User::where('id', $user->id)->delete();
+        return back()->with('message', 'The account was successfully deleted!');
+    }
+
     // Edit User Role
     // public function edit() {
     //     return view('', ['users' => request()->user()->get()]);
