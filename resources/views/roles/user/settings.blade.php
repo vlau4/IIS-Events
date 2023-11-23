@@ -1,14 +1,5 @@
 <x-layout>
-    <div class="flex flex-col items-center justify-center text-center">
-        {{-- <form method="POST" action="{{ route('settings') }}" enctype="multipart/form-data">
-            @csrf 
-            <button class="bg-rose-800 text-white mt-4 rounded-xl py-2 px-10 hover:bg-black">
-                DELETE ACCOUNT
-            </button>
-
-            
-        </form> --}}
-        
+    <div class="flex flex-col items-center justify-center text-center">        
         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-rose-800 hover:bg-rose-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
             DELETE ACCOUNT
         </button>

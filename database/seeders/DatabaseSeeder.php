@@ -26,13 +26,13 @@ class DatabaseSeeder extends Seeder
                 'role' => 0
             ],
             [
-                'name' => 'Manager',
+                'name' => 'Thomas Manager',
                 'email' => 'manager@gmail.com',
                 'password' => bcrypt('123456'),
                 'role' => 1
             ],
             [
-                'name' => 'Admin',
+                'name' => 'Simone Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123456'),
                 'role' => 2
@@ -52,14 +52,5 @@ class DatabaseSeeder extends Seeder
                 'location_id' => $location->id
             ]);
         }
-
-        // for($i = 1; $i <= 6; $i++) {
-        //     for($j = 1; $j <= 3; $j++) {
-        //         Attending::factory()->create([
-        //             'user_id' => $j,
-        //             'event_id' => $i
-        //         ]);
-        //     }
-        // }
     }
 }

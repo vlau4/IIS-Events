@@ -8,7 +8,7 @@
             @csrf {{-- protection--}}
 
             <div class="mb-6">
-                <label for="title" class="inline-block text-lg mb-2">Event Title</label>
+                <label for="title" class="inline-block text-lg mb-2">Event Title *</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="title" value="{{old('title')}}"/>
                 @error('title')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -16,7 +16,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="category_id" class="inline-block text-lg mb-2">Category</label>
+                <label for="category_id" class="inline-block text-lg mb-2">Category *</label>
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{old('category_id')}}">
                     <option value=""></option>
                     @foreach($categories as $category)
@@ -40,7 +40,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="location_id" class="inline-block text-lg mb-2">Location</label>
+                <label for="location_id" class="inline-block text-lg mb-2">Location *</label>
                 <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{old('location_id')}}">
                     <option value=""></option>
                     @foreach($locations as $location)
@@ -53,7 +53,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="start" class="inline-block text-lg mb-2">Start Date</label>
+                <label for="start" class="inline-block text-lg mb-2">Start Date *</label>
                 <input type="date" class="border border-gray-200 rounded p-2 w-full" name="start" value="{{old('start')}}"/>
                 @error('start')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="end" class="inline-block text-lg mb-2">End Date</label>
+                <label for="end" class="inline-block text-lg mb-2">End Date *</label>
                 <input type="date" class="border border-gray-200 rounded p-2 w-full" name="end" value="{{old('end')}}"/>
                 @error('end')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -93,9 +93,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="logo" class="inline-block text-lg mb-2">
-                    Event Logo
-                </label>
+                <label for="logo" class="inline-block text-lg mb-2">Event Logo</label>
                 <input type="file" class="border border-gray-200 rounded p-2 w-full" name="logo"/>
                 @error('logo')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -103,9 +101,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="description" class="inline-block text-lg mb-2">
-                    Event Description
-                </label>
+                <label for="description" class="inline-block text-lg mb-2">Event Description *</label>
                 <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10" placeholder="Include price, description of event, etc">{{old('description')}}</textarea>
                 @error('description')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>

@@ -8,7 +8,7 @@
         <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
             @csrf {{-- protection--}}
             <div class="mb-6">
-                <label for="name" class="inline-block text-lg mb-2">Name</label>
+                <label for="name" class="inline-block text-lg mb-2">Name *</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="name" value="{{old('name')}}" required/>
                 @error('name')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
