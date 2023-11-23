@@ -13,16 +13,17 @@ class Attending extends Model
 
     protected $fillable = [
         'user_id',
-        'event_id'
+        'event_id',
+        'paid'
     ];
 
-    // // Relationship To User
-    // public function user() {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    // Relationship To User
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-    // // Relationship To Event
-    // public function event() {
-    //     return $this->belongsTo(Event::class, 'event_id');
-    // }
+    // Relationship To Event
+    public function event() {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
 }

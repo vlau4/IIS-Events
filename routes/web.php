@@ -8,6 +8,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\AttendingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,12 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Manage Events
     Route::get('/events/manage', [EventController::class, 'manage'])->name('events.manage');
+
+    // Manage Event Payments
+    Route::get('/events/{event}/payments', [EventController::class, 'payments'])->name('event.payments');
+
+    // Confirm User Payment
+    Route::post('/events/{attending}', [AttendingController::class, 'confirm'])->name('payments.confirm');
 
     //Show My Events
     Route::get('/events/mine', [EventController::class, 'showMyEvents'])->name('events.mine');

@@ -18,8 +18,8 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->word(),
-            'start' => $this->faker->date(),
-            'end' => $this->faker->date(),
+            'start' => $this->faker->dateTimeBetween('-2 weeks', '+1 week'),
+            'end' => $this->faker->dateTimeBetween('+1 week', '+10 weeks'),
             'tags' => 'festival, music, pop',
             'description' => $this->faker->paragraph(5),
             'capacity' => 'unlimited',

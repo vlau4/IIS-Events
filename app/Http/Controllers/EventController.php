@@ -26,11 +26,18 @@ class EventController extends Controller
     // Show Single Event
     public function show(Event $event) {
 
+        
+        if(auth()->user()) {    // if sign in, find out if user is attending the event
+            $attending = Attending::where('event_id', $event->id)->where('user_id', auth()->user()->id)->first();
+        } else {                // if not, he is not attending the event
+            $attending = 0;
+        }
+
         return view('events.show', [
             'event' => $event,
             'comments' => Comment::where('event_id', $event->id)->get(),
             'today' => date("Y-m-d"),
-            'attending' => Attending::where('event_id', $event->id)->where('user_id', auth()->user()->id)->first()
+            'attending' => $attending
         ]);
     }
 
@@ -209,6 +216,14 @@ class EventController extends Controller
     // Manage Events
     public function manage() {
         return view('events.manage', ['events' => request()->user()->events()->get()]);
+    }
+
+    // Manage Event Payments
+    public function payments(Event $event) {
+        return view('events.payments', [
+            'event' => $event,
+            'attendings' => Attending::where('event_id', $event->id)->get()
+        ]);
     }
 
     // Show Event Confirm Section
