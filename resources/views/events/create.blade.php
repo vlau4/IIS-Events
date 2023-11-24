@@ -20,7 +20,7 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{old('category_id')}}">
                     <option value=""></option>
                     @foreach($categories as $category)
-                        @if($category->parent == 0)
+                        @if($category->parent_id == 0)
                             <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
                         @else
                             @php
@@ -101,7 +101,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="description" class="inline-block text-lg mb-2">Event Description *</label>
+                <label for="description" class="inline-block text-lg mb-2">Event Description</label>
                 <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10" placeholder="Include price, description of event, etc">{{old('description')}}</textarea>
                 @error('description')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>

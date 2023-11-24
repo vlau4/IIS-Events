@@ -23,14 +23,14 @@ class CategoryController extends Controller
                 yield $item;
     
                 // continue yielding results from the recursive call
-                yield from $generator($categories->where('parent', $item->id));
+                yield from $generator($categories->where('parent_id', $item->id));
             }
         };
     
         $categories = LazyCollection::make(function () use ($categories, $generator) {
 
             // yield from root level
-            yield from $generator($categories->where('parent', null));
+            yield from $generator($categories->where('parent_id', null));
         })->flatten()->collect();
 
         return view('categories.create', [
@@ -42,11 +42,11 @@ class CategoryController extends Controller
     public function store(Request $request) {
         $formFields = $request->validate([
             'name' => 'required',
-            'parent' => 'required'
+            'parent_id' => 'required'
         ]);
 
-        if($formFields['parent'] != 0) {    // if it is not subcategory, tahn position is position of parent + 1
-            $formFields['position'] = (Category::where('id', $formFields['parent'])->first()->position) + 1;
+        if($formFields['parent_id'] != 0) {    // if it is not subcategory, tahn position is position of parent_id + 1
+            $formFields['position'] = (Category::where('id', $formFields['parent_id'])->first()->position) + 1;
         }
 
         Category::create($formFields);
@@ -87,14 +87,14 @@ class CategoryController extends Controller
                 yield $item;
     
                 // continue yielding results from the recursive call
-                yield from $generator($categories->where('parent', $item->id));
+                yield from $generator($categories->where('parent_id', $item->id));
             }
         };
     
         $categories = LazyCollection::make(function () use ($categories, $generator) {
 
             // yield from root level
-            yield from $generator($categories->where('parent', null));
+            yield from $generator($categories->where('parent_id', null));
         })->flatten()->collect();
 
         return view('roles.manager.editCategory', [
@@ -109,7 +109,7 @@ class CategoryController extends Controller
         
         $formFields = $request->validate([
             'name' => 'required',
-            'parent' => 'required'
+            'parent_id' => 'required'
         ]);
 
         $category->update($formFields);

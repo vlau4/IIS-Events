@@ -43,6 +43,12 @@ class DatabaseSeeder extends Seeder
             User::create($user);
         }
 
+        // $categories = [
+        //     [
+        //         'name' = 'Music'
+        //         ]
+        // ]
+
         for($i = 1; $i <= 3; $i++) {
             $category = Category::factory()->create();
             $location = Location::factory()->create();

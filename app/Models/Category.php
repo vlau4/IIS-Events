@@ -12,7 +12,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'parent',
+        'parent_id',
         'position',
         'confirmed'
     ];
@@ -20,5 +20,15 @@ class Category extends Model
     // Relationship With Events
     public function events() {
         return $this->hasMany(Event::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
     }
 }

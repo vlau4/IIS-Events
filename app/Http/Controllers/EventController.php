@@ -25,8 +25,6 @@ class EventController extends Controller
 
     // Show Single Event
     public function show(Event $event) {
-
-        
         if(auth()->user()) {    // if sign in, find out if user is attending the event
             $attending = Attending::where('event_id', $event->id)->where('user_id', auth()->user()->id)->first();
         } else {                // if not, he is not attending the event
@@ -97,14 +95,14 @@ class EventController extends Controller
                 yield $item;
     
                 // continue yielding results from the recursive call
-                yield from $generator($categories->where('parent', $item->id));
+                yield from $generator($categories->where('parent_id', $item->id));
             }
         };
     
         $categories = LazyCollection::make(function () use ($categories, $generator) {
 
             // yield from root level
-            yield from $generator($categories->where('parent', null));
+            yield from $generator($categories->where('parent_id', null));
         })->flatten()->collect();
 
         // dd($categories);
@@ -123,10 +121,10 @@ class EventController extends Controller
             'location_id' => 'required',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'capacity' => 'required',
+            'capacity' => 'nullable',
             'entry_fee' => 'nullable',
-            'tags' => 'required',
-            'description' => 'required'
+            'tags' => 'nullable',
+            'description' => 'nullable'
         ]);
 
         if($request->hasFile('logo')) {
@@ -154,14 +152,14 @@ class EventController extends Controller
                 yield $item;
     
                 // continue yielding results from the recursive call
-                yield from $generator($categories->where('parent', $item->id));
+                yield from $generator($categories->where('parent_id', $item->id));
             }
         };
     
         $categories = LazyCollection::make(function () use ($categories, $generator) {
 
             // yield from root level
-            yield from $generator($categories->where('parent', null));
+            yield from $generator($categories->where('parent_id', null));
         })->flatten()->collect();
 
         return view('events.edit', [
@@ -186,10 +184,10 @@ class EventController extends Controller
             'location_id' => 'required',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'capacity' => 'required',
+            'capacity' => 'nullable',
             'entry_fee' => 'nullable',
-            'tags' => 'required',
-            'description' => 'required'
+            'tags' => 'nullable',
+            'description' => 'nullable'
         ]);
 
         if($request->hasFile('logo')) {

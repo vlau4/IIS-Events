@@ -6,11 +6,19 @@
 
         <table class="w-full table-auto rounded-sm">
             <tbody>
+                <tr class="text-bold">
+                    <td class="px-1 py-2 border-b border-gray-300 text-lg">Name</td>
+                    <td class="px-1 py-2 border-b border-gray-300 text-lg">Parent Category</td>
+                    <td class="px-1 py-2 border-b border-gray-300 text-lg"></td>
+                    <td class="px-1 py-2 border-b border-gray-300 text-lg"></td>
+                </tr>
                 @unless($categories->isEmpty())
                     @foreach($categories as $category)
                         <tr class="border-gray-300">
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">{{$category->name}}</td>
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                            <td class="px-1 py-1 border-t border-b border-gray-300">{{$category->name}}</td>
+                            <td class="px-1 py-1 border-t border-b border-gray-300">{{$category->parent->name}}</td>
+
+                            <td class="px-1 py-1 border-t border-b border-gray-300">
                                 <form method="POST" action="{{ route('category.confirm', $category) }}">
                                     @csrf
                                     <button class="text-green-600">
@@ -18,7 +26,7 @@
                                     </button>
                                 </form>
                             </td>
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                            <td class="px-1 py-1 border-t border-b border-gray-300">
                                 <form method="POST" action="{{ route('category.unconfirm', [$category]) }}">
                                     @csrf
                                     @method('DELETE')
@@ -31,7 +39,7 @@
                     @endforeach
                 @else
                     <tr class="border-gray-300">
-                        <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                        <td class="px-1 pt-10">
                             <p class="text-center">No new categories found.</p>
                         </td>
                     </tr>
