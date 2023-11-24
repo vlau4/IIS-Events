@@ -55,7 +55,7 @@ class EventController extends Controller
             
         }
 
-        return view('roles.user.myEvents');
+        return view('users.myEvents');
     }
 
     
@@ -226,7 +226,7 @@ class EventController extends Controller
 
     // Show Event Confirm Section
     public function showConfirm() {
-        return view('roles.manager.confirmEvents', ['events' => Event::where('confirmed', 0)->get()]);
+        return view('events.confirmEvents', ['events' => Event::where('confirmed', 0)->get()]);
     }
 
     // Confirm New Event Created by User

@@ -56,7 +56,7 @@ class CategoryController extends Controller
 
     // Show Category Confirm Section
     public function showConfirm() {
-        return view('roles.manager.confirmCategories', ['categories' => Category::where('confirmed', 0)->get()]);
+        return view('categories.confirm', ['categories' => Category::where('confirmed', 0)->get()]);
     }
 
     // Confirm New Category Created by User
@@ -97,7 +97,7 @@ class CategoryController extends Controller
             yield from $generator($categories->where('parent_id', null));
         })->flatten()->collect();
 
-        return view('roles.manager.editCategory', [
+        return view('categories.edit', [
             'categories' => $categories,
             'ctg' => $category,
             'text' => ''
@@ -119,6 +119,6 @@ class CategoryController extends Controller
 
     // Manage Categories
     public function manage() {
-        return view('roles.manager.manageCategories', ['categories' => Category::All()]);
+        return view('categories.manage', ['categories' => Category::All()]);
     }
 }

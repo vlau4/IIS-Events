@@ -29,7 +29,7 @@ class LocationController extends Controller
 
     // Show Location Confirm Section
     public function showConfirm() {
-        return view('roles.manager.confirmLocations', ['locations' => Location::where('confirmed', 0)->get()]);
+        return view('locations.confirm', ['locations' => Location::where('confirmed', 0)->get()]);
     }
 
     // Confirm New Location Created by User
@@ -49,7 +49,7 @@ class LocationController extends Controller
 
     // Show Location Edit Form
     public function edit(Location $location) {
-        return view('roles.manager.editLocation', [
+        return view('locations.edit', [
             'location' => $location
         ]);
     }
@@ -72,6 +72,6 @@ class LocationController extends Controller
 
     // Manage Locations
     public function manage() {
-        return view('roles.manager.manageLocations', ['locations' => Location::where('confirmed', 1)->get()]);
+        return view('locations.manage', ['locations' => Location::where('confirmed', 1)->get()]);
     }
 }

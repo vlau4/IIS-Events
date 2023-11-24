@@ -10,9 +10,8 @@ class UserController extends Controller
 
     // Manage Users
     public function manage() {
-        // return view('roles.admin.manage-users', ['users' => request()->user()->get()]);
         $role = 'User';
-        return view('roles.admin.manage-users', ['users' => User::all()]);
+        return view('users.manage-users', ['users' => User::all()]);
     }
 
     // Change User Role
@@ -34,7 +33,7 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        return view('roles.user.settings');
+        return view('users.settings');
     }
 
     // Delete Account
@@ -48,9 +47,4 @@ class UserController extends Controller
         $user->delete();
         return back()->with('message', 'The account was successfully deleted!');
     }
-
-    // Edit User Role
-    // public function edit() {
-    //     return view('', ['users' => request()->user()->get()]);
-    // }
 }
