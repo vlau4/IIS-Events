@@ -11,7 +11,7 @@ class UserController extends Controller
     // Manage Users
     public function manage() {
         $role = 'User';
-        return view('users.manage-users', ['users' => User::all()]);
+        return view('users.manage-users', ['users' => User::all()->sortBy('name')]);
     }
 
     // Change User Role

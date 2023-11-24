@@ -36,12 +36,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr class="border-gray-300">
-                        <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">You did not post any events. Try to <a href="{{ Route('event.create') }}" class="text-sky-700 underline">POST</a> any.</p>
-                        </td>
-                    </tr>
                 @endunless
             </tbody>
         </table>

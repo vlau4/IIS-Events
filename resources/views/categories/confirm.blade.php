@@ -34,7 +34,7 @@
                                 </form>
                             </td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">
-                                <form method="POST" action="{{ route('category.unconfirm', [$category]) }}">
+                                <form method="POST" action="{{ route('category.unconfirm', $category) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-600">

@@ -9,6 +9,7 @@
                 <tr class="text-bold">
                     <td class="px-1 py-2 border-b border-gray-300 text-lg"></td>
                     <td class="px-1 py-2 border-b border-gray-300 text-lg">Title</td>
+                    <td class="px-1 py-2 border-b border-gray-300 text-lg">User</td>
                     <td class="px-1 py-2 border-b border-gray-300 text-lg">Category</td>
                     <td class="px-1 py-2 border-b border-gray-300 text-lg">Adress</td>
                     <td class="px-1 py-2 border-b border-gray-300 text-lg">Start</td>
@@ -22,9 +23,10 @@
                             <td class="px-1 py-1 border-t border-b border-gray-300">
                                 <img class="w-40" src="{{$event->logo ? asset('storage/' . $event->logo) : asset('/images/no-image.png')}}" alt=""/>
                             </td>
-                            <td class="px-1 py-8 border-t border-b border-gray-300 text-lg">
+                            <td class="px-1 py-8 border-t border-b border-gray-300">
                                 <a href="{{ Route('event.show', $event) }}">{{$event->title}}</a>
                             </td>
+                            <td class="px-1 py-1 border-t border-b border-gray-300">{{$event->user->name}}</td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">{{$event->category->name}}</td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">{{$event->location->street}} {{$event->location->number}}, {{$event->location->city}} {{$event->location->zip}}, {{$event->location->country}}</td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">{{$event->start}}</td>

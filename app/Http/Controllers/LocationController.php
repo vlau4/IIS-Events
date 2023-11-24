@@ -72,6 +72,6 @@ class LocationController extends Controller
 
     // Manage Locations
     public function manage() {
-        return view('locations.manage', ['locations' => Location::where('confirmed', 1)->get()]);
+        return view('locations.manage', ['locations' => Location::where('confirmed', 1)->get()->sortBy('street')]);
     }
 }

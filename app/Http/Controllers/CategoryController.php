@@ -119,6 +119,6 @@ class CategoryController extends Controller
 
     // Manage Categories
     public function manage() {
-        return view('categories.manage', ['categories' => Category::All()]);
+        return view('categories.manage', ['categories' => Category::All()->sortBy('name')]);
     }
 }

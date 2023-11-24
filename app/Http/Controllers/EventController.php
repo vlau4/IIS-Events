@@ -55,7 +55,7 @@ class EventController extends Controller
             
         }
 
-        return view('users.myEvents');
+        return view('users.my-events');
     }
 
     
@@ -213,7 +213,7 @@ class EventController extends Controller
 
     // Manage Events
     public function manage() {
-        return view('events.manage', ['events' => request()->user()->events()->get()]);
+        return view('events.manage', ['events' => request()->user()->events()->get()->sortBy('title')]);
     }
 
     // Manage Event Payments
@@ -226,7 +226,7 @@ class EventController extends Controller
 
     // Show Event Confirm Section
     public function showConfirm() {
-        return view('events.confirmEvents', ['events' => Event::where('confirmed', 0)->get()]);
+        return view('events.confirm', ['events' => Event::where('confirmed', 0)->get()]);
     }
 
     // Confirm New Event Created by User
