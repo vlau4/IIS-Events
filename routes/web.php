@@ -139,6 +139,9 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
     // Store Comment
     Route::post('/events/{event}/comments', [CommentController::class, 'store'])->name('comment.store');
 
+    // Delete Comment
+    Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
+
     // Settings
     Route::get('/settings', [UserController::class, 'settings'])->name('settings');
 

@@ -31,13 +31,13 @@
                 <div id="create" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="createButton">
                         <li class="px-2">
-                            <a href="{{ Route('event.create') }}" class=""><i class="fa-solid fa-plus"></i> New Event</a>
+                            <a href="{{ Route('event.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Event</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('category.create') }}" class=""><i class="fa-solid fa-plus"></i> New Category</a>
+                            <a href="{{ Route('category.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Category</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('location.create') }}" class=""><i class="fa-solid fa-plus"></i> New Location</a>
+                            <a href="{{ Route('location.create') }}" class="hover:text-sky-700"><i class="fa-solid fa-plus"></i> New Location</a>
                         </li>
                     </ul>
                 </div>
@@ -52,13 +52,13 @@
                 <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
                         <li class="px-2">
-                            <a href="{{ Route('event.confirm.show') }}" class=""><i class="fa-solid fa-check"></i> Confirm Events</a>
+                            <a href="{{ Route('event.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('category.confirm.show') }}" class=""><i class="fa-solid fa-check"></i> Confirm Categories</a>
+                            <a href="{{ Route('category.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('location.confirm.show') }}" class=""><i class="fa-solid fa-check"></i> Confirm Locations</a>
+                            <a href="{{ Route('location.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
                         </li>
                     </ul>
                 </div>
@@ -73,10 +73,10 @@
                 <div id="manage" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="manageButton">
                         <li class="px-2">
-                            <a href="{{ Route('categories.manage') }}" class=""><i class="fa-solid fa-check"></i> Manage Categories</a>
+                            <a href="{{ Route('categories.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Manage Categories</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('locations.manage') }}" class=""><i class="fa-solid fa-check"></i> Manage Locations</a>
+                            <a href="{{ Route('locations.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Manage Locations</a>
                         </li>
                     </ul>
                 </div>
@@ -105,23 +105,23 @@
             @endif
 
             @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
-            {{-- USER --}}
-            <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{auth()->user()->name}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-            </svg>
-            </button>
-            
+                {{-- USER --}}
+                <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{auth()->user()->name}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                
                 <!-- Dropdown menu -->
                 <div id="user" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="userButton">
                         <li class="px-2">
-                            <a href="{{ Route('events.mine') }}" class=""><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                            <a href="{{ Route('events.mine') }}" class="hover:text-sky-700"><i class="fa-solid fa-calendar-days"></i> My Events</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('events.manage') }}" class=""><i class="fa-solid fa-gear"></i> Manage Events</a>
+                            <a href="{{ Route('events.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
                         </li>
                         <li class="px-2">
-                            <a href="{{ Route('settings') }}" class=""><i class="fa-solid fa-gear"></i> Settings</a>
+                            <a href="{{ Route('settings') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Settings</a>
                         </li>
                         <li class="px-2">
                             <form method="POST" action="/logout" class="inline">
@@ -134,7 +134,39 @@
                     </ul>
                 </div>
             @else
+                <ul>
+                    <li class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700">
+                        <a href="{{ Route('events.mine') }}" class=""><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                    </li>
+                    <li class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700">
+                        <a href="{{ Route('events.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
+                    </li>
+                </ul>
 
+                {{-- USER --}}
+                <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{auth()->user()->name}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                
+                <!-- Dropdown menu -->
+                <div id="user" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="userButton">
+                        
+                        <li class="px-2">
+                            <a href="{{ Route('settings') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="px-2">
+                            <form method="POST" action="/logout" class="inline">
+                                @csrf
+                                <button type="submit">
+                                    <i class="fa-solid fa-door-open"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @endif
             
         @else
 
