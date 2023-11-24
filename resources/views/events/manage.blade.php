@@ -34,8 +34,7 @@
                 @else
                     <tr class="border-gray-300">
                         <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">No events found</p>
-                            <a href="{{ Route('event.create') }}" class="absolute right-10 border border-gray-300 py-2 px-5">Post Job</a>
+                            <p class="text-center">You did not post any events. Try to <a href="{{ Route('event.create') }}" class="text-sky-700 underline">POST</a> any.</p>
                         </td>
                     </tr>
                 @endunless

@@ -30,7 +30,7 @@
                 @else
                     <tr class="border-gray-300">
                         <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">No locations found</p>
+                            <p class="text-center">There are not any locations.</p>
                         </td>
                     </tr>
                 @endunless

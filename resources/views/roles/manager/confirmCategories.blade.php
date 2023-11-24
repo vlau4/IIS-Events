@@ -14,9 +14,16 @@
                 </tr>
                 @unless($categories->isEmpty())
                     @foreach($categories as $category)
+                    @php
+                        if($category->parent) {
+                            $parent = $category->parent->name;
+                        } else {
+                            $parent = '-';
+                        }
+                    @endphp
                         <tr class="border-gray-300">
                             <td class="px-1 py-1 border-t border-b border-gray-300">{{$category->name}}</td>
-                            <td class="px-1 py-1 border-t border-b border-gray-300">{{$category->parent->name}}</td>
+                            <td class="px-1 py-1 border-t border-b border-gray-300">{{$parent}}</td>
 
                             <td class="px-1 py-1 border-t border-b border-gray-300">
                                 <form method="POST" action="{{ route('category.confirm', $category) }}">
