@@ -1,7 +1,7 @@
 <x-layout>
     <x-card class="p-10">
         <header>
-            <h1 class="text-3xl text-center font-bold my-6 uppercase">Confirm Locations | {{count($locations)}}</h1>
+            <h1 class="text-3xl text-center font-bold my-6 uppercase">Manage Locations</h1>
         </header>
 
         <table class="w-full table-auto rounded-sm">
@@ -9,17 +9,15 @@
                 @unless($locations->isEmpty())
                     @foreach($locations as $location)
                         <tr class="border-gray-300">
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <form method="POST" action="{{ route('location.confirm', $location) }}">
-                                    @csrf
-                                    <button class="text-green-600">
-                                        <i class="fa-solid fa-check"></i> Confirm</a>
-                                    </button>
-                                </form>
+                                {{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <form method="POST" action="{{ route('location.unconfirm', [$location]) }}">
+                                <a href="{{ Route('location.edit', $location) }}" class="text-sky-700 px-6 py-2 rounded-xl" >
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                <form method="POST" action="{{ Route('location.unconfirm', $location) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-600">
@@ -27,12 +25,12 @@
                                     </button>
                                 </form>
                             </td>
-                        </tr>    
+                        </tr>
                     @endforeach
                 @else
                     <tr class="border-gray-300">
                         <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">No new locations found.</p>
+                            <p class="text-center">No locations found</p>
                         </td>
                     </tr>
                 @endunless

@@ -74,7 +74,7 @@ class CategoryController extends Controller
         return back()->with('message', 'Category was unconfirmed successfully!');
     }
 
-    // Show Edit Form
+    // Show Category Edit Form
     public function edit(Category $category) {
         $categories = Category::where('confirmed', 1)->get();
 
@@ -97,8 +97,6 @@ class CategoryController extends Controller
             yield from $generator($categories->where('parent', null));
         })->flatten()->collect();
 
-        // dd($categories);
-
         return view('roles.manager.editCategory', [
             'categories' => $categories,
             'ctg' => $category,
@@ -106,13 +104,8 @@ class CategoryController extends Controller
         ]);
     }
 
-    // Update Event
+    // Update Category
     public function update(Request $request, Category $category) {
-
-        // Make sure logged in user is admin or manager
-        // if($event->user_id != auth()->id()) {
-        //     abort(403, 'Unauthorized Action');
-        // }
         
         $formFields = $request->validate([
             'name' => 'required',

@@ -104,7 +104,7 @@
     </nav>
     <main>
         <div class="container">
-            <h1>My Events</h1>
+            <h1 class="text-3xl text-center font-bold my-6 uppercase">My Events</h1>
             <div id='calendar'></div>
         </div>
         <script>
@@ -112,6 +112,8 @@
             var calendar = $('#calendar').fullCalendar({
                 header:{
                     right:'prev,next',
+                    center: '',
+                    left: 'title'
                 },
                 events: '/events/mine'
             });
