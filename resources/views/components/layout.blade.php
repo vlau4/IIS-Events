@@ -13,10 +13,9 @@
 </head>
 <body class="mb-48">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
-        {{-- <nav class="flex justify-between items-center mb-4"> --}}
 
         {{-- LOGO --}}
-        <nav class="flex items-center mb-4">
+        <nav class="flex justify-between items-center mb-4 mr-20">
         <a href="/"><img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/></a>
 
         @auth
@@ -52,7 +51,7 @@
                 <div id="confirmation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="confirmationButton">
                         <li class="px-2">
-                            <a href="{{ Route('event.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
+                            <a href="{{ Route('confirm') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Events</a>
                         </li>
                         <li class="px-2">
                             <a href="{{ Route('category.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Categories</a>

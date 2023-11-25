@@ -13,10 +13,17 @@
         </p>
         @auth
         @else
-        <div>
-            <a href="/register" class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
-                Sign Up to List an Event
+        <div class="inline-block text-white text-lg">
+            <a href="/register" class="text-base inline-block border-2 border-white text-white py-2 px-4 mx-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+                Sign Up
             </a>
+            or
+            <a href="/login" class="text-base inline-block border-2 border-white text-white py-2 px-4 mx-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+                Login In
+            </a>
+        </div>
+        <div class="text-white py-1 text-lg">
+            to List an Event
         </div>
         @endauth
     </div>

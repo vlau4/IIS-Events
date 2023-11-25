@@ -40,9 +40,21 @@ Route::middleware(['auth', 'user-role:admin'])->group(function() {
 // __________ ADMIN AND MANAGER ________________________________________________________________________
 
 Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
+
+    // Show Event Confirm Section
+    Route::get('/confirm', [EventController::class, 'showConfirm'])->name('confirm');
+    Route::get('/confirm/events', function(){
+        return view('partials/_events');
+    });
+    Route::get('/confirm/categories', function(){
+        return view('partials/_categories');
+    });
+    Route::get('/confirm/locations', function(){
+        return view('partials/_locations');
+    });
     
     // Show Event Confirm Section
-    Route::get('/events/confirmation', [EventController::class, 'showConfirm'])->name('event.confirm.show');
+    // Route::get('/events/confirmation', [EventController::class, 'showConfirm'])->name('event.confirm.show');
 
     // Show Category Confirm Section
     Route::get('/categories/confirmation', [CategoryController::class, 'showConfirm'])->name('category.confirm.show');
