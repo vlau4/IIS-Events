@@ -67,20 +67,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
-
-        // for every event create attending to the new user
-        $events = Event::all();
-        foreach($events as $event) {
-            $formFields['event_id'] = $event->id;
-            $formFields['user_id'] = $user->id;
-            Attending::create($formFields);
-        }
-        
-        return $user;
     }
 }
