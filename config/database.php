@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$JAWSDB_URL=parse_url('JAWSDB_URL');
-
 return [
 
     /*
@@ -48,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => isset($JAWSDB_URL['host']) ? $JAWSDB_URL['host'] : env('DB_HOST', '127.0.0.1'),
-            'port' => isset($JAWSDB_URL['port']) ? $JAWSDB_URL['port'] : env('DB_PORT', '3306'),
-            'database' => isset($JAWSDB_URL['path']) ? ltrim($JAWSDB_URL['path'], "/") : env('DB_DATABASE', 'forge'),
-            'username' => isset($JAWSDB_URL['user']) ? $JAWSDB_URL['user'] : env('DB_USERNAME', 'forge'),
-            'password' => isset($JAWSDB_URL['pass']) ? $JAWSDB_URL['pass'] : env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -68,11 +66,11 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'ltnya0pnki2ck9w8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'database'),
+            'username' => env('DB_USERNAME', 'chtbomhbynwdoild'),
+            'password' => env('DB_PASSWORD', 'peyodut38l78dvql'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
