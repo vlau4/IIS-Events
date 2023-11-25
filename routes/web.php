@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommentController;
@@ -139,6 +138,9 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Store Comment
     Route::post('/events/{event}/comments', [CommentController::class, 'store'])->name('comment.store');
+
+    // Delete Comment
+    Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
 
     // Settings
     Route::get('/settings', [UserController::class, 'settings'])->name('settings');

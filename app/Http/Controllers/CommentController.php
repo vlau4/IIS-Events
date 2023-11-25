@@ -34,4 +34,14 @@ class CommentController extends Controller
 
         return redirect()->route('event.show', ['event' => $event])->with('message', 'Comment added successfully!');
     }
+
+    // Delete Comment
+    public function delete(Comment $comment) {
+        if($comment->user_id != auth()->user()->id) {
+            back()->with('err', 'You cannot delete comment that is not yours!');
+        }
+
+        $comment->delete();
+        return back()->with('message', 'Category was unconfirmed successfully!');
+    }
 }

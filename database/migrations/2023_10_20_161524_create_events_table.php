@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('title');
             $table->date('start');
             $table->date('end');
-            $table->string('capacity');
+            $table->string('capacity')->nullable();
             $table->string('entry_fee')->nullable();
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->string('logo')->nullable(); // nullable() means if it does not have logo-path, it is ok. It can be NULL.
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->tinyInteger('confirmed')->default(0); // 0 - not confirmed, 1 - confirmed
             $table->timestamps();
         });

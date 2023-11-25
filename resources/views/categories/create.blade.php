@@ -16,11 +16,11 @@
             </div>
 
             <div class="mb-6">
-                <label for="parent" class="inline-block text-lg mb-2">Parent Category</label>
-                <select class="border border-gray-200 rounded p-2 w-full" name="parent" value="{{old('parent')}}">
+                <label for="parent_id" class="inline-block text-lg mb-2">Parent Category</label>
+                <select class="border border-gray-200 rounded p-2 w-full" name="parent_id" value="{{old('parent_id')}}">
                     <option value="0"></option>
                     @foreach($categories as $category)
-                        @if($category->parent == 0)
+                        @if($category->parent_id == 0)
                             <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
                         @else
                             @php

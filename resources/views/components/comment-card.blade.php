@@ -11,11 +11,33 @@
                 </div>
             </form>
         </div>
-        @foreach ($comments as $comment)
-        <div class="px-2 m-2 border border-gray-200 rounded flex">
-            <h4 class="font-bold">{{$comment->user->name}}</h4>
-            <p class="mx-6">{{$comment->content}}</p>
-        </div>
-        @endforeach
+        
+        <table class="w-full table-auto rounded-sm">
+            <tbody>
+                @unless($comments->isEmpty())
+                    @foreach($comments as $comment)
+                        <tr class="border-gray-300">
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                {{$comment->user->name}}
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                {{$comment->content}}
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                @if($comment->user_id == auth()->user()->id)
+                                    <form method="POST" action="{{ route('comment.delete', $comment) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-600">
+                                            <i class="fa-solid fa-x"></i>
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                @endunless
+            </tbody>
+        </table>
     </x-card>
 </div>

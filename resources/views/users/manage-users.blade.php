@@ -9,15 +9,15 @@
                 @unless($users->isEmpty())
                     @foreach($users as $user)
                         <tr class="border-gray-300">
-                            <td class="px-4 py-4 border-t border-b border-gray-300 text-lg">
+                            <td class="px-16 py-4 border-t border-b border-gray-300 text-lg">
                                 {{$user->name}}
                             </td>
-                            <td class="py-4 border-t border-b border-gray-300 text-lg left-100">
+                            <td class="px-16 py-4 border-t border-b border-gray-300 text-lg">
                                 <form method="POST" action="{{ route('user', $user) }}" enctype="multipart/form-data">
                                     @csrf {{-- protection--}}
                                     @method('PUT')
                                     <div class="flex">
-                                        <div class="mb-6 mx-4">
+                                        <div class="">
                                             <select class="border border-gray-200 rounded p-2" name="role" value="{{$user->id}}">
                                                 @if($user->role == 'user')
                                                     <option value="0">{{$user->role}}</option>
@@ -41,7 +41,7 @@
                                     </div>
                                 </form>
                             </td>
-                            <td>
+                            <td class="px-16 py-4 border-t border-b border-gray-300 text-lg">
                                 <form method="POST" action="{{ route('user.destroy', $user) }}">
                                     @csrf
                                     @method('DELETE')
@@ -52,9 +52,11 @@
                     @endforeach
                 @else
                     <tr class="border-gray-300">
-                        <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">No users found</p>
+                        <td></td>
+                        <td class="px-1 pt-10">
+                            <p class="text-center">There are not any users.</p>
                         </td>
+                        <td></td>
                     </tr>
                 @endunless
             </tbody>

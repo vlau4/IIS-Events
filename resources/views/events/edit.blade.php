@@ -22,7 +22,7 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{$event->category_id}}">
                     <option value="{{$event->category_id}}">{{$event->category->name}}</option>
                     @foreach($categories as $category)
-                        @if($category->parent == 0)
+                        @if($category->parent_id == 0)
                             <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
                         @else
                             @php
