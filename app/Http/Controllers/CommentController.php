@@ -11,9 +11,9 @@ class CommentController extends Controller
 {
     // Store Comment
     public function store(Request $request, Event $event) {
-
+        
         // Adding a comment after the end of event
-        if($event->end > date("Y-m-d")) {
+        if($event->end > date("Y-m-d H:i:s")) {
             return back()->with('err', 'You cannot add comment since the event has not ended!');
         }
 

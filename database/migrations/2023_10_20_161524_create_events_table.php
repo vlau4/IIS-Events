@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->date('start');
-            $table->date('end');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->string('capacity')->nullable();
             $table->string('entry_fee')->nullable();
             $table->string('tags')->nullable();

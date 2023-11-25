@@ -43,8 +43,6 @@ class EventController extends Controller
     public function showMyEvents(Request $request) {
 
         $events = Attending::where('user_id', auth()->user()->id)->get(['event_id']);
-        
-        // $index = 0;
 
         if ($request->ajax()) {
             $data = Event::whereDate('start', '>=', $request->start)
@@ -119,7 +117,7 @@ class EventController extends Controller
             'title' => 'required|max:40',
             'category_id' => 'required',
             'location_id' => 'required',
-            'start' => 'required|date',
+            'start' => 'required|date|after:today',
             'end' => 'required|date|after:start',
             'capacity' => 'nullable',
             'entry_fee' => 'nullable',
@@ -182,7 +180,7 @@ class EventController extends Controller
             'title' => 'required|max:40',
             'category_id' => 'required',
             'location_id' => 'required',
-            'start' => 'required|date',
+            'start' => 'required|date|after:today',
             'end' => 'required|date|after:start',
             'capacity' => 'nullable',
             'entry_fee' => 'nullable',

@@ -57,16 +57,16 @@
             </div>
 
             <div class="mb-6">
-                <label for="start" class="inline-block text-lg mb-2">Start Date *</label>
-                <input type="date" class="border border-gray-200 rounded p-2 w-full" name="start" value="{{$event->start}}"/>
+                <label for="start" class="inline-block text-lg mb-2">Start *</label>
+                <input type="datetime-local" class="border border-gray-200 rounded p-2 w-full" name="start" value="{{$event->start}}"/>
                 @error('start')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
 
             <div class="mb-6">
-                <label for="end" class="inline-block text-lg mb-2">End Date *</label>
-                <input type="date" class="border border-gray-200 rounded p-2 w-full" name="end" value="{{$event->end}}"/>
+                <label for="end" class="inline-block text-lg mb-2">End *</label>
+                <input type="datetime-local" class="border border-gray-200 rounded p-2 w-full" name="end" value="{{$event->end}}"/>
                 @error('end')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
