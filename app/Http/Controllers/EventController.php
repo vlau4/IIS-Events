@@ -227,11 +227,10 @@ class EventController extends Controller
     // Show Event Confirm Section
     public function showConfirm() {
         return view('confirm', [
-            'events' => Event::where('confirmed', 0)->get(),
-            'categories' => Category::where('confirmed', 0)->get(),
-            'locations' => Location::where('confirmed', 0)->get()
-    ]);
-        // return view('events.confirm', ['events' => Event::where('confirmed', 0)->get()]);
+            'events' => Event::where('confirmed', 0)->get()->sortBy('updated_at'),
+            'categories' => Category::where('confirmed', 0)->get()->sortBy('updated_at'),
+            'locations' => Location::where('confirmed', 0)->get()->sortBy('updated_at')
+        ]);
     }
 
     // Confirm New Event Created by User

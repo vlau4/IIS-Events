@@ -19,7 +19,7 @@
             </a>
             or
             <a href="/login" class="text-base inline-block border-2 border-white text-white py-2 px-4 mx-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
-                Login In
+                Log In
             </a>
         </div>
         <div class="text-white py-1 text-lg">

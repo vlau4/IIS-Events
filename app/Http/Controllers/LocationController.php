@@ -27,11 +27,6 @@ class LocationController extends Controller
         return redirect('/')->with('message', 'Location created successfully!');
     }
 
-    // Show Location Confirm Section
-    public function showConfirm() {
-        return view('locations.confirm', ['locations' => Location::where('confirmed', 0)->get()]);
-    }
-
     // Confirm New Location Created by User
     public function confirm(Location $location) {
         $formFields['confirmed'] = 1;

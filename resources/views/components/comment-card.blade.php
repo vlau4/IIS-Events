@@ -24,15 +24,17 @@
                                 {{$comment->content}}
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                @if($comment->user_id == auth()->user()->id)
-                                    <form method="POST" action="{{ route('comment.delete', $comment) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="text-red-600">
-                                            <i class="fa-solid fa-x"></i>
-                                        </button>
-                                    </form>
-                                @endif
+                                @auth
+                                    @if($comment->user_id == auth()->user()->id)
+                                        <form method="POST" action="{{ route('comment.delete', $comment) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-red-600">
+                                                <i class="fa-solid fa-x"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
                             </td>
                         </tr>
                     @endforeach

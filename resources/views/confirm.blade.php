@@ -1,37 +1,53 @@
 <x-layout>
     <x-card class="p-10">
         <header>
-            <button onclick="events_content()" class="block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-                Events
+            <button id="events_button" onclick="events_content()" class="inline-flex block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                Events ({{count($events)}})
             </button>
-            {{-- <button onclick="categories_content()" class="block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-                Categories
+            <button id="categories_button" onclick="categories_content()" class="inline-flex block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                Categories ({{count($categories)}})
             </button>
-            <button onclick="locations_content()" class="block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-                Locations
-            </button> --}}
+            <button id="locations_button" onclick="locations_content()" class="inline-flex block text-white bg-sky-800 hover:bg-sky-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                Locations ({{count($locations)}})
+            </button>
         </header>
 
+        <div class="row" id="content_div">
+            {{-- EVENTS --}}
+            <div id="events" style="display:block;">
+                @include('partials/_events')
+            </div>
+
+            {{-- CATEGORIES --}}
+            <div id="categories" style="display:none;">
+                @include('partials/_categories')
+            </div>
+
+            {{-- LOCATIONS --}}
+            <div id="locations" style="display:none;">
+                @include('partials/_locations')
+            </div>
+        </div>
+
         <script type="text/javascript">
-            function events_content()
-            {
-                $('#content_div').load('/confirm/events/');
+            function events_content() {
+                document.getElementById('events').style.display = "block";
+                document.getElementById('categories').style.display = "none";
+                document.getElementById('locations').style.display = "none";
             }
 
-            // function categories_content()
-            // {
-            //     $('#content_div').load('/confirm/categories/');
-            // }
+            function categories_content() {
+                document.getElementById('events').style.display = "none";
+                document.getElementById('categories').style.display = "block";
+                document.getElementById('locations').style.display = "none";
+            }
 
-            // function locations_content()
-            // {
-            //     $('#content_div').load('/confirm/locations/');
-            // }
+            function locations_content() {
+                document.getElementById('events').style.display = "none";
+                document.getElementById('categories').style.display = "none";
+                document.getElementById('locations').style.display = "block";
+            }
         </script>
-
-        <div class="row" id="content_div">
-            asd
-        </div>
             
     </x-card>
 </x-layout>

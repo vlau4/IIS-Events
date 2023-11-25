@@ -54,11 +54,6 @@ class CategoryController extends Controller
         return redirect('/')->with('message', 'Category created successfully!');
     }
 
-    // Show Category Confirm Section
-    public function showConfirm() {
-        return view('categories.confirm', ['categories' => Category::where('confirmed', 0)->get()]);
-    }
-
     // Confirm New Category Created by User
     public function confirm(Category $category) {
         $formFields['confirmed'] = 1;

@@ -42,7 +42,13 @@
                 </div>
 
                 {{-- CONFIRM --}}
-                <button id="confirmationButton" data-dropdown-toggle="confirmation" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Confirmation <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <ul>
+                    <li class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700">
+                        <a href="{{ Route('confirm') }}" class=""><i class="fa-solid fa-gear"></i> Confirm</a>
+                    </li>
+                </ul>
+
+                {{-- <button id="confirmationButton" data-dropdown-toggle="confirmation" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Confirmation <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
                 </button>
@@ -60,7 +66,7 @@
                             <a href="{{ Route('location.confirm.show') }}" class="hover:text-sky-700"><i class="fa-solid fa-check"></i> Confirm Locations</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
 
                 {{-- MANAGE --}}
                 <button id="manageButton" data-dropdown-toggle="manage" data-dropdown-trigger="hover" class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Manage<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -138,7 +144,7 @@
                         <a href="{{ Route('events.mine') }}" class=""><i class="fa-solid fa-calendar-days"></i> My Events</a>
                     </li>
                     <li class="ml-20 text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700">
-                        <a href="{{ Route('events.manage') }}" class="hover:text-sky-700"><i class="fa-solid fa-gear"></i> Manage Events</a>
+                        <a href="{{ Route('events.manage') }}" class=""><i class="fa-solid fa-gear"></i> Manage Events</a>
                     </li>
                 </ul>
 
