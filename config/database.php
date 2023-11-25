@@ -65,12 +65,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'ltnya0pnki2ck9w8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'sue2t5q4irnk8nfw'),
-            'username' => env('DB_USERNAME', 'chtbomhbynwdoild'),
-            'password' => env('DB_PASSWORD', 'peyodut38l78dvql'),
+            'url' => $JAWSDB_URL,
+            'host' => $DB_HOST,
+            'port' => $DB_PORT,
+            'database' => $DB_DATABASE,
+            'username' => $DB_USERNAME,
+            'password' => $DB_PASSWORD,
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
