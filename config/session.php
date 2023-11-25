@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION'),
+    'connection' => env('SESSION_CONNECTION'), //'connection' => env('SESSION_CONNECTION', 'meetupapp-2194bf3164e2.herokuapp.com'),
 
     /*
     |--------------------------------------------------------------------------

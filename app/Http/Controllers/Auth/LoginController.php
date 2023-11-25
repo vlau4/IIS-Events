@@ -48,12 +48,16 @@ class LoginController extends Controller
         ]);
         if(auth()->attempt(['email'=>$input['email'], 'password'=>$input['password']])) {
             if(auth()->user()->role == 'admin') {
+                $request->session()->regenerate();
                 return redirect('/');
             } else if(auth()->user()->role == 'manager') {
+                $request->session()->regenerate();
                 return redirect('/');
             } else if(auth()->user()->role == 'user') {
+                $request->session()->regenerate();
                 return redirect('/');
             } else {
+                $request->session()->regenerate();
                 return redirect('/');
             }
         } else {
