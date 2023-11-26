@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Category;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -33,13 +35,13 @@ class LocationController extends Controller
 
         $location->update($formFields);
 
-        return back()->with('message', 'Location was confirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 2)->with('message', 'Location was confirmed successfully!');
     }
 
     // Unconfirm New Location Created by User
     public function unconfirm(Location $location) {
         $location->delete();
-        return back()->with('message', 'Location was unconfirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 2)->with('message', 'Location was unconfirmed successfully!');
     }
 
     // Show Location Edit Form

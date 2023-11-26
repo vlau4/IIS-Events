@@ -13,20 +13,69 @@
         </header>
 
         <div class="row" id="content_div">
-            {{-- EVENTS --}}
-            <div id="events" style="display:block;">
-                @include('partials/_events')
-            </div>
+            @if(session()->has('mode'))
+                @if(session('mode') == 0)
+                    {{-- EVENTS --}}
+                    <div id="events" style="display:block;">
+                        @include('partials/_events')
+                    </div>
 
-            {{-- CATEGORIES --}}
-            <div id="categories" style="display:none;">
-                @include('partials/_categories')
-            </div>
+                    {{-- CATEGORIES --}}
+                    <div id="categories" style="display:none;">
+                        @include('partials/_categories')
+                    </div>
 
-            {{-- LOCATIONS --}}
-            <div id="locations" style="display:none;">
-                @include('partials/_locations')
-            </div>
+                    {{-- LOCATIONS --}}
+                    <div id="locations" style="display:none;">
+                        @include('partials/_locations')
+                    </div>
+                @elseif(session('mode') == 1)
+                    {{-- EVENTS --}}
+                    <div id="events" style="display:none;">
+                        @include('partials/_events')
+                    </div>
+
+                    {{-- CATEGORIES --}}
+                    <div id="categories" style="display:block;">
+                        @include('partials/_categories')
+                    </div>
+
+                    {{-- LOCATIONS --}}
+                    <div id="locations" style="display:none;">
+                        @include('partials/_locations')
+                    </div>
+                @elseif(session('mode') == 2)
+                    {{-- EVENTS --}}
+                    <div id="events" style="display:none;">
+                        @include('partials/_events')
+                    </div>
+
+                    {{-- CATEGORIES --}}
+                    <div id="categories" style="display:none;">
+                        @include('partials/_categories')
+                    </div>
+
+                    {{-- LOCATIONS --}}
+                    <div id="locations" style="display:block;">
+                        @include('partials/_locations')
+                    </div>
+                @endif
+            @else
+                {{-- EVENTS --}}
+                <div id="events" style="display:block;">
+                    @include('partials/_events')
+                </div>
+
+                {{-- CATEGORIES --}}
+                <div id="categories" style="display:none;">
+                    @include('partials/_categories')
+                </div>
+
+                {{-- LOCATIONS --}}
+                <div id="locations" style="display:none;">
+                    @include('partials/_locations')
+                </div>
+            @endif
         </div>
 
         <script type="text/javascript">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Category;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
@@ -60,13 +62,13 @@ class CategoryController extends Controller
 
         $category->update($formFields);
 
-        return back()->with('message', 'Category was confirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 1)->with('message', 'Category was confirmed successfully!');
     }
 
     // Unconfirm New Category Created by User
     public function unconfirm(Category $category) {
         $category->delete();
-        return back()->with('message', 'Category was unconfirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 1)->with('message', 'Category was unconfirmed successfully!');
     }
 
     // Show Category Edit Form

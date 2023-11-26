@@ -295,7 +295,8 @@ class EventController extends Controller
         return view('confirm', [
             'events' => Event::where('confirmed', 0)->get()->sortBy('updated_at'),
             'categories' => Category::where('confirmed', 0)->get()->sortBy('updated_at'),
-            'locations' => Location::where('confirmed', 0)->get()->sortBy('updated_at')
+            'locations' => Location::where('confirmed', 0)->get()->sortBy('updated_at'),
+            'mode' => 0
         ]);
     }
 
@@ -305,12 +306,12 @@ class EventController extends Controller
 
         $event->update($formFields);
 
-        return back()->with('message', 'Event was confirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 0)->with('message', 'Event was confirmed successfully!');
     }
 
     // Unconfirm New Events Created by User
     public function unconfirm(Event $event) {
         $event->delete();
-        return back()->with('message', 'Event was unconfirmed successfully!');
+        return redirect()->route('confirm')->with('mode', 0)->with('message', 'Event was unconfirmed successfully!');
     }
 }
