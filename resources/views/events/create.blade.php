@@ -77,9 +77,18 @@
             </div>
 
             <div class="mb-6">
-                <label for="entry_fee" class="inline-block text-lg mb-2">Entry Fee</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="entry_fee" value="{{old('entry_fee')}}"/>
-                @error('entry_fee')
+                <label for="fee" class="inline-block text-lg">Entry Fee</label>
+                <p class="text-sm mb-2 ">(Do not use <b>:</b> or <b>,</b>)</p>
+                <div id="fee">
+                    <p class="inline-block text-sm font-semibold">Category</p>
+                    <p class="inline-block text-sm  font-semibold">Value</p><br>
+                    <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_category_0" value="{{old('fee_category_0')}}"/>
+                    <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_value_0" value="{{old('fee_value_0')}}"/>
+                </div>
+                <div class="text-center">
+                    <button onclick="new_fee()" type="button" class="border border-black rounded rounded px-0.5 m-1 hover:bg-gray-200">Add Fee Category</button>
+                </div>
+                @error('fee')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
@@ -116,3 +125,13 @@
         </form>
     </x-card>
 </x-layout>
+
+<script type="text/javascript">
+    i = 1;
+    function new_fee() {
+        console.log('ahoj')
+        document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_category_" + i +"'/>";
+        document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_value_" + i +"'/>";
+        i++;
+    }
+</script>

@@ -120,10 +120,44 @@ class EventController extends Controller
             'start' => 'required|date|after:today',
             'end' => 'required|date|after:start',
             'capacity' => 'nullable',
-            'entry_fee' => 'nullable',
             'tags' => 'nullable',
             'description' => 'nullable'
         ]);
+
+        $entryFee = [];
+        for($i=0; ; $i++) {
+            $cat = 'fee_category_' . str($i);
+            $val = 'fee_value_' . str($i);
+            error_log($request->$cat);
+            error_log($request->$val);
+            if($request->$cat && $request->$val) {
+                error_log('here');
+                if(strpos($request->$cat, ',') || strpos($request->$cat, ':') || strpos($request->$val, ',') || strpos($request->$cat, ':')) {
+                    return redirect()->route('event.create')->with('err', 'You cannot use ":" or "," in Entry Fee field!');
+                }
+                array_push($entryFee, $request->$cat); // even item in $entryFee is always category
+                array_push($entryFee, $request->$val); // odd item in $entryFee is always value
+            } elseif($i == 0 && $request->$val){
+                $formFields['entry_fee'] = $request->$val;
+                break;
+            } else {    // one of the fields is missing or both or nothing more was given
+                break;
+            }
+        }
+
+        
+        if(count($entryFee) != 0){  // it is not only one value without categories
+            $feeField = '';
+            for($i = 0; $i<count($entryFee); $i++){
+                if($i % 2 == 0) {   // it is category
+                    $feeField .= $entryFee[$i] . ':';
+                } else {   // it is value
+                    $feeField .= $entryFee[$i] . ',';
+                }
+            }
+            $formFields['entry_fee'] = $feeField;
+        }
+        
 
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
@@ -163,8 +197,7 @@ class EventController extends Controller
         return view('events.edit', [
             'event' => $event,
             'categories' => $categories,
-            'locations' => Location::where('confirmed', 1)->get(),
-            'text' => ''
+            'locations' => Location::where('confirmed', 1)->get()
         ]);
     }
 
@@ -183,10 +216,45 @@ class EventController extends Controller
             'start' => 'required|date|after:today',
             'end' => 'required|date|after:start',
             'capacity' => 'nullable',
-            'entry_fee' => 'nullable',
             'tags' => 'nullable',
             'description' => 'nullable'
         ]);
+
+        $entryFee = [];
+        for($i=0; ; $i++) {
+            $cat = 'fee_category_' . str($i);
+            $val = 'fee_value_' . str($i);
+            error_log($request->$cat);
+            error_log($request->$val);
+            if($request->$cat && $request->$val) {
+                error_log('here');
+                if(strpos($request->$cat, ',') || strpos($request->$cat, ':') || strpos($request->$val, ',') || strpos($request->$cat, ':')) {
+                    return redirect()->route('event.create')->with('err', 'You cannot use ":" or "," in Entry Fee field!');
+                }
+                array_push($entryFee, $request->$cat); // even item in $entryFee is always category
+                array_push($entryFee, $request->$val); // odd item in $entryFee is always value
+            } elseif($i == 0 && $request->$val){
+                $formFields['entry_fee'] = $request->$val;
+                break;
+            } else {    // one of the fields is missing or both or nothing more was given
+                break;
+            }
+        }
+
+        
+        if(count($entryFee) != 0){  // it is not only one value without categories
+            $feeField = '';
+            for($i = 0; $i<count($entryFee); $i++){
+                if($i % 2 == 0) {   // it is category
+                    $feeField .= $entryFee[$i] . ':';
+                } else {   // it is value
+                    $feeField .= $entryFee[$i] . ',';
+                }
+            }
+            $formFields['entry_fee'] = $feeField;
+        }
+
+        $formFields['entry_fee'] = $feeField;
 
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');

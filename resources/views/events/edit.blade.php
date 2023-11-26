@@ -57,7 +57,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="start" class="inline-block text-lg mb-2">Start *</label>
+                <label for="start" class="inline-block text-lg mb-2">Start Date *</label>
                 <input type="datetime-local" class="border border-gray-200 rounded p-2 w-full" name="start" value="{{$event->start}}"/>
                 @error('start')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="end" class="inline-block text-lg mb-2">End *</label>
+                <label for="end" class="inline-block text-lg mb-2">End Date *</label>
                 <input type="datetime-local" class="border border-gray-200 rounded p-2 w-full" name="end" value="{{$event->end}}"/>
                 @error('end')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -81,8 +81,15 @@
             </div>
 
             <div class="mb-6">
-                <label for="entry_fee" class="inline-block text-lg mb-2">Entry Fee</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="entry_fee" value="{{$event->entry_fee}}"/>
+                <label for="fee" class="inline-block text-lg">Entry Fee</label>
+                <p class="text-sm mb-2 ">(Do not use <b>:</b> or <b>,</b>)</p>
+                <div id="fee">
+                    <p class="inline-block text-sm font-semibold">Category</p>
+                    <p class="inline-block text-sm  font-semibold">Value</p><br>
+                    <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_category_0" value="{{old('fee_category_0')}}"/>
+                    <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_value_0" value="{{old('fee_value_0')}}"/>
+                </div>
+                <button onclick="new_fee()" type="button">Add Fee Category</button>
                 @error('entry_fee')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
@@ -123,3 +130,13 @@
         </form>
     </x-card>
 </x-layout>
+
+<script type="text/javascript">
+    i = 1;
+    function new_fee() {
+        console.log('ahoj')
+        document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_category_" + i +"'/>";
+        document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_value_" + i +"'/>";
+        i++;
+    }
+</script>

@@ -19,7 +19,13 @@
                         {{$event->description}}
                         <p> <b>Capacity:</b> {{$event->capacity}}</p>
                         @if($event->entry_fee)
-                            <p> <b>Entry Fee:</b> {{$event->entry_fee}}</p>
+                            <p> <b>Entry Fee:</b> </p>
+                            @php
+                                $fees = explode(',', $event->entry_fee);
+                            @endphp
+                            @foreach ($fees as $fee)
+                                <p>{{str_replace(':', ': ', $fee)}}</p>
+                            @endforeach
                         @endif
 
                         {{-- Adding event only if has not started yet and you have not added to the attendings yet --}}
