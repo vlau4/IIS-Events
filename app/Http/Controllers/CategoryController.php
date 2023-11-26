@@ -109,6 +109,20 @@ class CategoryController extends Controller
             'parent_id' => 'required'
         ]);
 
+        // if category is parent category
+        // if(Category::where('parent_id', $category->id)) {
+
+        // }
+
+        $parent = Category::where('id', $request->parent_id)->first();
+
+        if($parent) { // it is subcategory
+            $formFields['position'] = ($parent->position) + 1;
+        } else { // it is main category
+            $formFields['position'] = 0;
+        }
+        
+
         $category->update($formFields);
 
         return redirect('/categories/manage')->with('message', 'Category was updated successfully!');
