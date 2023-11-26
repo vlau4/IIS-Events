@@ -17,7 +17,9 @@
                     <h3 class="text-3xl font-bold mb-4"> Event Description </h3>
                     <div class="text-lg">
                         {{$event->description}}
-                        <p> <b>Capacity:</b> {{$event->capacity}}</p>
+                        @if($event->capacity)
+                            <p> <b>Capacity:</b> {{$event->capacity}}</p>
+                        @endif
                         @if($event->entry_fee)
                             <p> <b>Entry Fee:</b> </p>
                             @php

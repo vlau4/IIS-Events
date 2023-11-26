@@ -89,8 +89,10 @@
                     <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_category_0" value="{{old('fee_category_0')}}"/>
                     <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_value_0" value="{{old('fee_value_0')}}"/>
                 </div>
-                <button onclick="new_fee()" type="button">Add Fee Category</button>
-                @error('entry_fee')
+                <div class="text-center">
+                    <button onclick="new_fee()" type="button" class="border border-black rounded rounded px-0.5 m-1 hover:bg-gray-200">Add Fee Category</button>
+                </div>
+                @error('fee')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
