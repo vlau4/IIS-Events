@@ -42,18 +42,20 @@ class EventController extends Controller
     // Show My Events
     public function showMyEvents(Request $request) {
 
-        $events = Attending::where('user_id', auth()->user()->id)->get(['event_id']);
+        $attendings = Attending::where('user_id', auth()->user()->id)->get(['event_id']);
 
         if ($request->ajax()) {
             $data = Event::whereDate('start', '>=', $request->start)
             ->whereDate('end',   '<=', $request->end)
-            ->whereIn('id', $events)
+            ->whereIn('id', $attendings)
             ->get(['id', 'title', 'start', 'end']);
             return response()->json($data);
             
         }
 
-        return view('users.my-events');
+        return view('users.my-events', [
+            'events' => Event::whereIn('id', $attendings)->get()
+        ]);
     }
 
     

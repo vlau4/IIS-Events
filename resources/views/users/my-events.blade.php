@@ -22,4 +22,51 @@
             });
         });
         </script>
+        <table class="w-full table-auto rounded-sm">
+            <tbody>
+                <tr class="border-gray-300">
+                    <td class="px-1 py-1 border-b border-gray-300">Title</td>
+                    <td class="px-1 py-1 border-b border-gray-300">Category</td>
+                    <td class="px-1 py-1 border-b border-gray-300">Adress</td>
+                    <td class="px-1 py-1 border-b border-gray-300">Start</td>
+                    <td class="px-1 py-1 border-b border-gray-300">End</td>
+                    <td class="px-1 py-1 border-t border-b border-gray-300"></td>
+                </tr>
+            @unless($events->isEmpty())
+                @foreach($events as $event)
+                    <tr class="border-gray-300">
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            <a href="{{ Route('event.show', $event) }}">{{$event->title}}</a>
+                        </td>
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            {{$event->category->name}}
+                        </td>
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            {{$event->location->street}} {{$event->location->number}}, {{$event->location->city}}
+                        </td>
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            {{$event->start}}
+                        </td>
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            {{$event->end}}
+                        </td>
+                        </td>
+                        <td class="px-1 py-1 border-t border-b border-gray-300">
+                            <form method="POST" action="{{ route('attending.remove', $event) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-600">
+                                    <i class="fa-solid fa-trash-can"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr class="border-gray-300">
+                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                        <p class="text-center">You do not attend any events. <a href="{{ Route('home') }}" class="text-sky-700 underline">FIND</a> any.</p>
+                    </td>
+                </tr>
+            @endunless
 </x-layout>

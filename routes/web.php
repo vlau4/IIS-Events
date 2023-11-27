@@ -109,6 +109,9 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
     // Confirm User Payment
     Route::post('/events/{attending}', [AttendingController::class, 'confirm'])->name('payments.confirm');
 
+    // Remove From My Events
+    Route::delete('/events/{event}/attending/remove', [AttendingController::class, 'remove'])->name('attending.remove');
+
     //Show My Events
     Route::get('/events/mine', [EventController::class, 'showMyEvents'])->name('events.mine');
 
