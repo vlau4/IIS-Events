@@ -16,13 +16,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
 
         {{-- LOGO --}}
-        <nav class="flex justify-between items-center mb-4 text-lg bg-sky-900">
+        <nav class="flex items-center mb-4 text-lg bg-sky-900">
         <a href="/"><img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/></a>
 
         @auth
             @if(auth()->user()->role == 'manager' || auth()->user()->role == 'admin')
                 {{-- CREATE --}}
-            <button id="createButton" data-dropdown-toggle="create" data-dropdown-trigger="hover" class=" text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg px-6 mx-6 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Create <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <button id="createButton" data-dropdown-toggle="create" data-dropdown-trigger="hover" class=" text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg px-6 mx-6 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">Create <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
                 </button>
@@ -142,7 +142,7 @@
                 </ul>
 
                 {{-- USER --}}
-                <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class=" text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg  px-6 mx-6 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{auth()->user()->name}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <button id="userButton" data-dropdown-toggle="user" data-dropdown-trigger="hover" class="text-white bg-sky-900 hover:bg-sky-700 focus:outline-none font-medium rounded-lg  px-6 mx-6 py-2.5 text-center inline-flex items-center dark:bg-sky-900 dark:hover:bg-sky-700" type="button">{{explode(' ', auth()->user()->name)[0]}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
                 </button>
