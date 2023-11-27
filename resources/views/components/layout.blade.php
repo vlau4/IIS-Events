@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
 
         {{-- LOGO --}}
-        <nav class="flex items-center mb-4 text-lg bg-sky-900">
+        <nav class="flex items-center justify-between mb-4 text-lg bg-sky-900">
         <a href="/"><img class="w-24" src="{{asset('images/logo.png')}}" alt="" class="logo"/></a>
 
         @auth
