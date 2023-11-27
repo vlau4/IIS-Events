@@ -21,7 +21,7 @@
                     <option value=""></option>
                     @foreach($categories as $category)
                         @if($category->parent_id == 0)
-                            <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{(old('category_id') == $category->id ? "selected":"") }} class="font-semibold">{{$category->name}}</option>
                         @else
                             @php
                                 $text = '';
@@ -30,7 +30,7 @@
                                 }
                                 $text .= $category->name;
                             @endphp
-                            <option value="{{$category->id}}">{!!$text!!}</option>
+                            <option value="{{$category->id}}" {{(old('category_id') == $category->id ? "selected":"") }}>{!!$text!!}</option>
                         @endif
                     @endforeach
                 </select>
@@ -44,7 +44,7 @@
                 <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{old('location_id')}}">
                     <option value=""></option>
                     @foreach($locations as $location)
-                        <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
+                        <option value="{{$location->id}}" {{(old('location_id') == $location->id ? "selected":"") }}>{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
                     @endforeach
                 </select>
                 @error('location_id')
