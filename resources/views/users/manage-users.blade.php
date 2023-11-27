@@ -18,20 +18,10 @@
                                     @method('PUT')
                                     <div class="flex">
                                         <div class="">
-                                            <select class="border border-gray-200 rounded p-2" name="role" value="{{$user->id}}">
-                                                @if($user->role == 'user')
-                                                    <option value="0">{{$user->role}}</option>
-                                                    <option value="1">manager</option>
-                                                    <option value="2">admin</option>
-                                                @elseif($user->role == 'manager')
-                                                    <option value="1">{{$user->role}}</option>
-                                                    <option value="0">user</option>
-                                                    <option value="2">admin</option>
-                                                @else
-                                                    <option value="2">{{$user->role}}</option>
-                                                    <option value="0">user</option>
-                                                    <option value="1">manager</option>
-                                                @endif
+                                            <select class="border border-gray-200 rounded p-2" name="role">
+                                                <option value="0" {{($user->role == 'user') ? "selected":"" }}>user</option>
+                                                <option value="1" {{($user->role == 'manager') ? "selected":"" }}>manager</option>
+                                                <option value="2" {{($user->role == 'admin') ? "selected":"" }}>admin</option>
                                             </select>
                                         </div>
 
