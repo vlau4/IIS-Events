@@ -20,10 +20,9 @@
             <div class="mb-6">
                 <label for="category_id" class="inline-block text-lg mb-2">Category *</label>
                 <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{$event->category_id}}">
-                    <option value="{{$event->category_id}}">{{$event->category->name}}</option>
                     @foreach($categories as $category)
                         @if($category->parent_id == 0)
-                            <option value="{{$category->id}}" class="font-semibold">{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{($category->id == $event->category_id ? "selected":"") }} class="font-semibold">{{$category->name}}</option>
                         @else
                             @php
                                 $text = '';
@@ -32,7 +31,7 @@
                                 }
                                 $text .= $category->name;
                             @endphp
-                            <option value="{{$category->id}}">{!!$text!!}</option>
+                            <option value="{{$category->id}}" {{($category->id == $event->category_id ? "selected":"") }}>{!!$text!!}</option>
                         @endif
                     @endforeach
                 </select>
@@ -43,12 +42,8 @@
 
             <div class="mb-6">
                 <label for="location_id" class="inline-block text-lg mb-2">Location *</label>
-                <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{$event->location_id}}">
-                    <option value="{{$event->location_id}}">{{$event->location->street}} {{$event->location->number}}, {{$event->location->city}} {{$event->location->zip}}, {{$event->location->country}}</option>
                     @foreach($locations as $location)
-                        @if($location->id != $event->location_id)
-                            <option value="{{$location->id}}">{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
-                        @endif
+                        <option value="{{$location->id}}" {{($location->id == $event->location_id ? "selected":"") }}>{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
                     @endforeach
                 </select>
                 @error('location_id')
