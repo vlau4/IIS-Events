@@ -34,7 +34,7 @@
                 @endunless
             </tbody>
         </table>
-        <h2 class="text-3xl my-6 uppercase border-b-2 border-gray-700">Others</h2>
+        <h2 class="text-3xl my-6 uppercase border-b-2 border-gray-700">Confirmed payments</h2>
         <table class="w-full table-auto rounded-sm">
             <tbody>
                 @unless($attendings->isEmpty())
