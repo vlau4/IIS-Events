@@ -25,7 +25,7 @@
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                 @auth
-                                    @if($comment->user_id == auth()->user()->id)
+                                    @if($comment->user_id == auth()->user()->id || auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                                         <form method="POST" action="{{ route('comment.delete', $comment) }}">
                                             @csrf
                                             @method('DELETE')

@@ -37,8 +37,11 @@ class CommentController extends Controller
 
     // Delete Comment
     public function delete(Comment $comment) {
-        if($comment->user_id != auth()->user()->id) {
-            back()->with('err', 'You cannot delete comment that is not yours!');
+        if(!auth()) {
+            return back()->with('err', 'You cannot delete comment that is not yours!');
+        }
+        if($comment->user_id != auth()->user()->id && auth()->user()->role == 'user') {
+            return back()->with('err', 'You cannot delete comment that is not yours!');
         }
 
         $comment->delete();
