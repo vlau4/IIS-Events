@@ -80,8 +80,12 @@
                 <label for="fee" class="inline-block text-lg">Entry Fee</label>
                 <p class="text-sm mb-2 ">(Do not use <b>:</b> or <b>,</b>)</p>
                 <div id="fee">
-                    <p class="inline-block text-sm font-semibold">Category</p>
-                    <p class="inline-block text-sm  font-semibold">Value</p><br>
+                    <table class="w-full table-auto rounded-sm">
+                        <tr>
+                            <td class="text-sm font-semibold">Category</td>
+                            <td class="text-sm  font-semibold">Value</td>
+                        </tr>
+                    </table>
                     <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_category_0" value="{{old('fee_category_0')}}"/>
                     <input type="text" class="border border-gray-200 rounded p-2" style="width:49.4%;" name="fee_value_0" value="{{old('fee_value_0')}}"/>
                 </div>
@@ -132,7 +136,6 @@
 <script type="text/javascript">
     i = 1;
     function new_fee() {
-        console.log('ahoj')
         document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_category_" + i +"'/>";
         document.getElementById('fee').innerHTML += "\n<input type='text' class='border border-gray-200 rounded p-2' style='width:49.4%;' name='fee_value_" + i +"'/>";
         i++;
