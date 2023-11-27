@@ -38,7 +38,7 @@ class UserController extends Controller
 
     // Delete Account
     public function delete() {
-        User::where('id', auth()->user()->id)->delete();
+        User::where('id', auth()->user()->id)->first()->delete();
         return redirect('/')->with('message', 'Your account was successfully deleted!');
     }
 

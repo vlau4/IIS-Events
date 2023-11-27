@@ -94,6 +94,12 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
 
 Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
+        // Settings
+        Route::get('/settings', [UserController::class, 'settings'])->name('settings');
+
+        // Delete Your Account
+        Route::delete('/delete', [UserController::class, 'delete'])->name('delete');
+
     // Show Event Create Form
     Route::get('/events/create', [EventController::class, 'create'])->name('event.create');
 
@@ -147,12 +153,6 @@ Route::middleware(['auth', 'user-role:admin|manager|user'])->group(function() {
 
     // Delete Comment
     Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
-
-    // Settings
-    Route::get('/settings', [UserController::class, 'settings'])->name('settings');
-
-    // Delete Your Account
-    Route::delete('/delete', [UserController::class, 'delete'])->name('delete');
 });
 
 // __________ EVERYONE _________________________________________________________________________________
