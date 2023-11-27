@@ -130,10 +130,7 @@ class EventController extends Controller
         for($i=0; ; $i++) {
             $cat = 'fee_category_' . str($i);
             $val = 'fee_value_' . str($i);
-            error_log($request->$cat);
-            error_log($request->$val);
             if($request->$cat && $request->$val) {
-                error_log('here');
                 if(strpos($request->$cat, ',') || strpos($request->$cat, ':') || strpos($request->$val, ',') || strpos($request->$cat, ':')) {
                     return redirect()->route('event.create')->with('err', 'You cannot use ":" or "," in Entry Fee field!');
                 }
@@ -226,10 +223,7 @@ class EventController extends Controller
         for($i=0; ; $i++) {
             $cat = 'fee_category_' . str($i);
             $val = 'fee_value_' . str($i);
-            error_log($request->$cat);
-            error_log($request->$val);
             if($request->$cat && $request->$val) {
-                error_log('here');
                 if(strpos($request->$cat, ',') || strpos($request->$cat, ':') || strpos($request->$val, ',') || strpos($request->$cat, ':')) {
                     return redirect()->route('event.create')->with('err', 'You cannot use ":" or "," in Entry Fee field!');
                 }
@@ -309,9 +303,15 @@ class EventController extends Controller
         return redirect()->route('confirm')->with('mode', 0)->with('message', 'Event was confirmed successfully!');
     }
 
-    // Unconfirm New Events Created by User
+    // Unconfirm New Event Created by User
     public function unconfirm(Event $event) {
         $event->delete();
         return redirect()->route('confirm')->with('mode', 0)->with('message', 'Event was unconfirmed successfully!');
+    }
+
+    // Delete Existing Event
+    public function delete(Event $event) {
+        $event->delete();
+        return back()->with('message', 'Event was deleted successfully!');
     }
 }

@@ -17,7 +17,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                             </td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">
-                                <form method="POST" action="{{ Route('location.unconfirm', $location) }}">
+                                <form method="POST" action="{{ Route('location.delete', $location) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-600">

@@ -44,6 +44,12 @@ class LocationController extends Controller
         return redirect()->route('confirm')->with('mode', 2)->with('message', 'Location was unconfirmed successfully!');
     }
 
+    // Delete Existing Location
+    public function delete(Location $location) {
+        $location->delete();
+        return back()->with('message', 'Location was deleted successfully!');
+    }
+
     // Show Location Edit Form
     public function edit(Location $location) {
         return view('locations.edit', [

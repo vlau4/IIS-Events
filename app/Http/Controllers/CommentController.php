@@ -42,6 +42,6 @@ class CommentController extends Controller
         }
 
         $comment->delete();
-        return back()->with('message', 'Category was unconfirmed successfully!');
+        return back()->with('message', 'Comment was deleted successfully!');
     }
 }

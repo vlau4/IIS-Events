@@ -26,7 +26,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                             </td>
                             <td class="px-1 py-1 border-t border-b border-gray-300">
-                                <form method="POST" action="{{ Route('category.unconfirm', $category) }}">
+                                <form method="POST" action="{{ Route('category.delete', $category) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-600">

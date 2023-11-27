@@ -71,6 +71,12 @@ class CategoryController extends Controller
         return redirect()->route('confirm')->with('mode', 1)->with('message', 'Category was unconfirmed successfully!');
     }
 
+    // Delete Existing Category
+    public function delete(Category $category) {
+        $category->delete();
+        return back()->with('message', 'Category was deleted successfully!');
+    }
+
     // Show Category Edit Form
     public function edit(Category $category) {
         $categories = Category::where('confirmed', 1)->get();

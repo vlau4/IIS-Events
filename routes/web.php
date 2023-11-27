@@ -47,20 +47,29 @@ Route::middleware(['auth', 'user-role:admin|manager'])->group(function() {
     // Confirm New Event Created by User
     Route::post('/events/{event}/confirm', [EventController::class, 'confirm'])->name('event.confirm');
 
+    // Unconfirm New Event Created by User
+    Route::delete('/events/{event}/unconfirm', [EventController::class, 'unconfirm'])->name('event.unconfirm');
+
     // Confirm New Category Created by User
     Route::post('/categories/{category}/confirm', [CategoryController::class, 'confirm'])->name('category.confirm');
+
+     // Unconfirm New Category Created by User
+     Route::delete('/categories/{category}/unconfirm', [CategoryController::class, 'unconfirm'])->name('category.unconfirm');
 
     // Confirm New Location Created by User
     Route::post('/locations/{location}/confirm', [LocationController::class, 'confirm'])->name('location.confirm');
 
-    // Unconfirm New Event Created by User
-    Route::delete('/events/{event}/unconfirm', [EventController::class, 'unconfirm'])->name('event.unconfirm');
-
-    // Unconfirm New Category Created by User
-    Route::delete('/categories/{category}/unconfirm', [CategoryController::class, 'unconfirm'])->name('category.unconfirm');
-
     // Unconfirm New Location Created by User
     Route::delete('/locations/{location}/unconfirm', [LocationController::class, 'unconfirm'])->name('location.unconfirm');
+
+    // Delete Existing Event
+    Route::delete('/events/{event}/delete', [EventController::class, 'delete'])->name('event.delete');
+
+    // Delete Existing Category
+    Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+    // Delete Existing Location
+    Route::delete('/locations/{location}/delete', [LocationController::class, 'delete'])->name('location.delete');
 
     // Manage Categories
     Route::get('/categories/manage', [CategoryController::class, 'manage'])->name('categories.manage');
