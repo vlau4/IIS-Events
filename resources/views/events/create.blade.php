@@ -17,7 +17,7 @@
 
             <div class="mb-6">
                 <label for="category_id" class="inline-block text-lg mb-2">Category *</label>
-                <select class="border border-gray-200 rounded p-2 w-full" name="category_id" value="{{old('category_id')}}">
+                <select class="border border-gray-200 rounded p-2 w-full" name="category_id">
                     <option value=""></option>
                     @foreach($categories as $category)
                         @if($category->parent_id == 0)
@@ -41,7 +41,7 @@
 
             <div class="mb-6">
                 <label for="location_id" class="inline-block text-lg mb-2">Location *</label>
-                <select class="border border-gray-200 rounded p-2 w-full" name="location_id" value="{{old('location_id')}}">
+                <select class="border border-gray-200 rounded p-2 w-full" name="location_id">
                     <option value=""></option>
                     @foreach($locations as $location)
                         <option value="{{$location->id}}" {{(old('location_id') == $location->id ? "selected":"") }}>{{$location->street}} {{$location->number}}, {{$location->city}} {{$location->zip}}, {{$location->country}}</option>
